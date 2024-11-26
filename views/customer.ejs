@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>7odafone</title>
+  <style>
+  @import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Roboto, sans-serif;
+    }
+    
+    
+    body {
+      height: 100vh;
+      background: #242932;
+      display: grid;
+      grid-template-columns: 30% 70%;
+    }
+    
+    ul {
+      background: #2F343D;
+      padding: 20px 0 10px 10px;
+      border-right: 5px solid  #dbd7e0;
+      width: 120px;
+      height:100vh;
+      transition: 0.5s;
+      overflow: hidden;
+    }
+    
+    ul li {
+      list-style: none;
+      padding: 15px;
+      padding-right: 0;
+      color: white;
+      font-size: 15px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      position: relative;
+      transition: 0.5s;
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+    
+    }
+    
+    ul li:hover {
+      transition: 0s;
+      background: #242932;
+    }
+    
+    ul li.active:before {
+      content: '';
+      position: absolute;
+      top:-20px;
+      right: 0px;
+      width: 20px;
+      height:20px;
+      background: transparent;
+      border-radius: 50%;
+      box-shadow: 10px 10px 0 #bcb5c4;
+    }
+    
+    ul li.active:after {
+      content: '';
+      position: absolute;
+      bottom:-20px;
+      right: 0px;
+      width: 20px;
+      height:20px;
+      background: transparent;
+      border-radius: 50%;
+      box-shadow: 10px -10px 0 #bcb5c4;
+    
+    }
+    
+    ul li.active {
+      background: #bcb5c4;
+      color:#242932;
+    }
+    
+    ul:hover {
+      width: 300px
+    }</style>
+</head>
+<body>
+  <div class="container">
+    <h2> Welcome <%= {currMobileNo} %></h2>
+    <ul>
+      <li class="active">Home</li>
+      <li>My Wallet</li>
+      <li>Offered Plans</li>
+      <li>My Benefits</li>
+      <li>Shops</li>
+    </ul>
+  </div>
+  <script> let items = document.querySelectorAll('li');
+
+    items.forEach(item => {
+      item.addEventListener('click', () => {
+         items.forEach(item => item.classList.remove('active'))
+          item.classList.add('active')
+    
+      })
+    })</script>
+</body>
+</html>

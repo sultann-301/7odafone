@@ -5,8 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const sql = require('mssql');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+
 
 var app = express();
  
@@ -20,24 +19,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
 
 
 
@@ -54,24 +38,67 @@ const config = {
   }
 };
 
-async function fetchData() {
-  try {
-    const pool = await sql.connect(config);
+// async function fetchData() {
+//   try {
+//     const pool = await sql.connect(config);
 
-    // Execute a query
-    const result = await pool.request().query('SELECT * FROM allShops');
+//     // Execute a query
+//     const result = await pool.request().query('SELECT * FROM Customer_account');
     
-    // Access rows
-    console.log(result.recordset); // Array of rows
-    console.log(result.rowsAffected); // Number of rows affected
-  } catch (err) {
-    console.error('SQL error:', err);
-  } finally {
-    sql.close(); // Always close the connection
-  }
-}
+//     // Access rows
+//     console.log(result.recordset); // Array of rows
+//     console.log(result.rowsAffected); // Number of rows affected
+//   } catch (err) {
+//     console.error('SQL error:', err);
+//   } finally { 
+//     sql.close(); // Always close the connection
+//   }
+// }
+let currMobileNo = ''
+app.get('/', (req,res) =>
+{
+  res.render('login')
+})
 
-fetchData();
+app.get('/customer', (req,res) =>
+{
+  res.render('customer', {currMobileNo})
+})
+
+
+app.post('/', async (req, res) =>{
+  const pool = await sql.connect(config);
+  const password = req.body.password
+  const mobileNo = req.body.mobileNo
+  console.log(password, mobileNo);
+  
+  if(mobileNo=='1' && password == 'hamoksha')
+  {
+    res.redirect('admin')
+  } else
+  {
+    const result = await pool.request()
+                .input('password', sql.VarChar, password)
+                .input('mobileNumber', sql.Char, mobileNo)
+                .query('SELECT dbo.AccountLoginValidation(@password, @mobileNumber) AS status');
+  const status = result.recordset[0].status
+  currMobileNo = mobileNo
+  if(status)
+  {
+    res.redirect('/customer')
+  } else 
+  {
+    res.redirect('/')
+  }
+
+  }
+
+  
+
+})
+
+
+// fetchData();
 
 app.listen(3000);
 // module.exports = app;
