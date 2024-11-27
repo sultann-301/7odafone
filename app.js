@@ -302,7 +302,52 @@ const redeemVoucher = async (inputNum, v_id) => {
 
 // admin 1
 
-//checking if i can commit
+async function allCustomerAccounts() {
+  const pool = await sql.connect(config);
+  const result = await pool
+    .request()
+    .query("SELECT * FROM allCustomerAccounts");
+  return result.recordset;
+}
+
+async function physicalStoreVouchers() {
+  const pool = await sql.connect(config);
+  const result = await pool
+    .request()
+    .query("SELECT * FROM PhysicalStoreVouchers");
+  return result.recordset;
+}
+
+async function allResolvedTickets() {
+  const pool = await sql.connect(config);
+  const result = await pool.request().query("SELECT * FROM allResolvedTickets");
+  return result.recordset;
+}
+
+async function accountPlan() {
+  const pool = await sql.connect(config);
+  const result = await pool.request().execute("Account_Plan");
+  return result.recordset;
+}
+
+async function accountPlanDate(subDate, planId) {
+  const pool = await sql.connect(config);
+  const result = await pool
+    .request()
+    .input("sub_date", sql.Date, subDate)
+    .input("plan_id", sql.Int, planId)
+    .query("SELECT * FROM dbo.Account_Plan_Date(@sub_date,@plan_id)");
+  return result.recordset;
+}
+
+async function accountSmsOffers(mobileNum) {
+  const pool = await sql.connect(config);
+  const result = await pool
+    .request()
+    .input("mobile_num", sql.Date, mobileNum)
+    .query("SELECT * FROM dbo.Account_SMS_Offers(@mobile_num)");
+  return result.recordset;
+}
 
 // admin 2
 
