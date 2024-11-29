@@ -1,20 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>7odafone</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>7oodaphone</title>
+  <style>
+  body {
+  /* Set the gradient background */
+  background:#100e0e;
+  background-size: 200% 200%;
+  /* Make it full-screen */
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position:relative;
+  overflow:hidden;
+}
+
+.hero{
+  position: absolute;
+  top: 0; /* Adjust position */
+  left: 0;
+  z-index:-3;
+  width:80%;
+  height:100vh;
+  overflow-y: hidden;
+  left:-2%;
+  top:6%;
+}
+
+.login-container{
+  width: 30%;
+  padding: 20px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: absolute;
+  top: 0; /* Adjust to overlap */
+  left: 63%;
+  height:100vh;
+}
+
+.wrapper {
+  display: grid;
+  place-content: center;
+  min-height: 30px;
+  font-family: "Oswald", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  width:100%;
+  margin-bottom:50px;
+}
+
+.space{
+  width:25px;
+}
+
+.waviy {
+  position: relative;
+  display:flex;
+  flex-direction: row;
+}
+
+.waviy span {
+  position: relative;
+  display: inline-block;
+  font-size: 40px;
+  color:#c7fffb;;
+  text-transform: uppercase;
+  animation: flip 2s infinite;
+  animation-delay: calc(.2s * var(--i))
+}
+
+@keyframes flip {
+  0%,80% {
+    transform: rotateY(360deg) 
+  }
+}
+
+h2{
+  margin-bottom:30px;
+}
+
+.input-container{
+  display:flex;
+  flex-direction: row;
+  width:300px;
+  height:35px;
+  border-radius:1rem ;
+  margin-bottom:30px;
+  background-color: transparent;
+  border:2px solid #50f8f3;
+}
+
+input {
+  outline: none;
+}
+
+.inputs{
+  width:100%;
+  height:95%;
+  border-radius:1rem;
+  background-color: transparent;
+  font-size: 14px;
+  color:#effefd;
+  border:none;
+  padding-left:15px;
+}
+
+.inputs::placeholder{
+  padding-left:5px;
+}
+
+button{
+  width: 100%;
+  height: 30px;
+  border-radius: 1rem;
+  border:none;
+  background-color: #50f8f3;
+  color: #100e0e;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover{
+  background-color: #232020;
+  color: #50f8f3;
+  border: 2px solid #50f8f3;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+
+  </style>
 </head>
 <body>
-    <h1>LOGIN</h1>
+  <div class="login-container">
     <form action="/" method="post">
-
-        <h2>Mobile Number</h2>
-        <input type="number" name="mobileNo"  required>
-        <h2>Password</h2>
-        <input type="password" name="password" required>
-        <button type="submit">Login</button>
+        <div class="wrapper">
+          <div class="waviy">
+            <span style="--i:1">U</span>
+            <span style="--i:2">s</span>
+            <span style="--i:3">e</span>
+            <span style="--i:4">r</span>
+            <div class="space"></div>
+            <span style="--i:5">L</span>
+            <span style="--i:6">o</span>
+            <span style="--i:7">g</span>
+            <span style="--i:8">i</span>
+            <span style="--i:9">n</span>
+           </div>
+        </div>
+      <div class="input-container"> 
+        <input class="inputs" placeholder="Mobile Number" type="number" name="mobileNo" id="number" required>
+      </div>
+      <div class="input-container">
+        <input class="inputs" placeholder="Password" type="password" name="password" id="password" required>
+      </div>
+      <button type="submit">Login</button>
     </form>
-    
+  </div>
+  <div class="hero">
+    <spline-viewer url="https://prod.spline.design/EZZD1DindelQLh3I/scene.splinecode"></spline-viewer>
+</div>
+  <script src="customer.js"></script>
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.46/build/spline-viewer.js"></script>
+  <script src="https://cdn.lordicon.com/lordicon.js"></script>
 </body>
 </html>
