@@ -75,7 +75,7 @@ app.post("/", async (req, res) => {
       .input("password", sql.VarChar, password)
       .input("mobileNumber", sql.Char, mobileNo)
       .query(
-        "SELECT dbo.AccountLoginValidation(@password, @mobileNumber) AS status"
+        "SELECT dbo.AccountLoginValidation(@mobileNumber, @password) AS status"
       );
     const status = result.recordset[0].status;
     currMobileNo = mobileNo;
