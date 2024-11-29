@@ -303,6 +303,7 @@ const redeemVoucher = async (inputNum, v_id) => {
 
 // admin 1
 
+//1-2
 async function allCustomerAccounts() {
   const pool = await sql.connect(config);
   const result = await pool
@@ -311,6 +312,7 @@ async function allCustomerAccounts() {
   return result.recordset;
 }
 
+//1-3
 async function physicalStoreVouchers() {
   const pool = await sql.connect(config);
   const result = await pool
@@ -319,18 +321,21 @@ async function physicalStoreVouchers() {
   return result.recordset;
 }
 
+//1-4
 async function allResolvedTickets() {
   const pool = await sql.connect(config);
   const result = await pool.request().query("SELECT * FROM allResolvedTickets");
   return result.recordset;
 }
 
+//1-5
 async function accountPlan() {
   const pool = await sql.connect(config);
   const result = await pool.request().execute("Account_Plan");
   return result.recordset;
 }
 
+//1-6
 async function accountPlanDate(subDate, planId) {
   const pool = await sql.connect(config);
   const result = await pool
@@ -341,6 +346,29 @@ async function accountPlanDate(subDate, planId) {
   return result.recordset;
 }
 
+//1-7
+async function accountUsagePlan(mobileNum, startDate) {
+  const pool = await sql.connect(config);
+  const result = await pool
+    .request()
+    .input("mobile_num", sql.Char, mobileNum)
+    .input("start_date", sql.Date, startDate)
+    .query("SELECT * FROM dbo.Account_Usage_Plan(@mobile_num,@start_date)");
+  return result.recordset;
+}
+
+//1-8
+async function benefitsAccounts(mobileNum, planID) {
+  const pool = await sql.connect(config);
+  const result = await pool
+    .request()
+    .input("mobile_num", sql.Char, mobileNum)
+    .input("plan_id", sql.Int, planID)
+    .execute("Benefits_Account");
+  return result.recordset;
+}
+
+//1-9
 async function accountSmsOffers(mobileNum) {
   const pool = await sql.connect(config);
   const result = await pool
