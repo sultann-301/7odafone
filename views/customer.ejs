@@ -17,16 +17,16 @@
     
     body {
       height: 100vh;
-      background: #242932;
+      background: #1e1b1b;
       display: grid;
       grid-template-columns: 30% 70%;
     }
     
     ul {
-      background: #2F343D;
+      background: #2e2a2a;
       padding: 20px 0 10px 10px;
-      border-right: 5px solid  #dbd7e0;
-      width: 120px;
+      border-right: 5px solid #c7fffb;
+      width: 150px;
       height:100vh;
       transition: 0.5s;
       overflow: hidden;
@@ -36,7 +36,7 @@
       list-style: none;
       padding: 15px;
       padding-right: 0;
-      color: white;
+      color: #effefd;
       font-size: 15px;
       margin-bottom: 10px;
       cursor: pointer;
@@ -44,12 +44,16 @@
       transition: 0.5s;
       border-top-left-radius: 20px;
       border-bottom-left-radius: 20px;
-    
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      letter-spacing: 1px;
+      padding-right:10px;
     }
     
     ul li:hover {
       transition: 0s;
-      background: #242932;
+      background: #1c1f24;
     }
     
     ul li.active:before {
@@ -61,7 +65,7 @@
       height:20px;
       background: transparent;
       border-radius: 50%;
-      box-shadow: 10px 10px 0 #bcb5c4;
+      box-shadow: 10px 10px 0 #c7fffb;
     }
     
     ul li.active:after {
@@ -73,23 +77,29 @@
       height:20px;
       background: transparent;
       border-radius: 50%;
-      box-shadow: 10px -10px 0 #bcb5c4;
+      box-shadow: 10px -10px 0 #c7fffb;
     
     }
     
     ul li.active {
-      background: #bcb5c4;
+      background: #c7fffb;
       color:#242932;
     }
     
     ul:hover {
       width: 300px
-    }</style>
+    }
+    
+    h2{
+      margin-bottom: 60px;
+      color: #c7fffb;
+    }
+    </style>
 </head>
 <body>
   <div class="container">
-    <h2> Welcome <%= currMobileNo %></h2>
     <ul>
+      <h2> Welcome <%= currMobileNo %></h2>
       <li class="active">Home</li>
       <li>My Wallet</li>
       <li>Offered Plans</li>
