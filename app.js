@@ -4,6 +4,7 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const sql = require("mssql");
+const { receiveMessageOnPort } = require("worker_threads");
 
 var app = express();
 
@@ -344,7 +345,7 @@ async function accountSmsOffers(mobileNum) {
   const pool = await sql.connect(config);
   const result = await pool
     .request()
-    .input("mobile_num", sql.Date, mobileNum)
+    .input("mobile_num", sql.Char, mobileNum)
     .query("SELECT * FROM dbo.Account_SMS_Offers(@mobile_num)");
   return result.recordset;
 }
