@@ -26,7 +26,7 @@ const config = {
   user: "sa",
   password: "dockerStrongPwd123",
   server: "localhost",
-  database: "Telecom_Team_5",
+  database: "Telecom_Team_6",
   options: {
     encrypt: true, // Enable encryption
     trustServerCertificate: true, // Accept self-signed certificates
@@ -49,17 +49,89 @@ const config = {
 //     sql.close(); // Always close the connection
 //   }
 // }
+
+/*<div>
+    <% function renderObject(obj) { %>
+      <% if (Array.isArray(obj)) { %>
+        <ul>
+          <% obj.forEach(item => { %>
+            <li><%= renderObject(item) %></li>
+          <% }) %>
+        </ul>
+      <% } else if (typeof obj === 'object' && obj !== null) { %>
+        <ul>
+          <% Object.keys(obj).forEach(key => { %>
+            <li>
+              <strong><%= key %>:</strong>
+              <%= renderObject(obj[key]) %>
+            </li>
+          <% }) %>
+        </ul>
+      <% } else { %>
+        <span><%= obj %></span>
+      <% } %>
+    <% } %>
+    <div>
+      <% renderObject(dish); %>
+    </div>
+  </div>
+  */
+const cookData = async (currMobileNo) => {
+const dish={};
+dish.allServicePlans = await allServicePlans();
+dish.unsubscribedPlans = await unsubscribedPlans(currMobileNo);
+dish.showUsage = await showUsage(currMobileNo);
+const pool=await sql.connect(config);
+var NID = await pool
+        .request()
+        .query(
+          `SELECT nationalID FROM customer_account WHERE mobileNo =${currMobileNo}`
+        );
+const {nationalID} = NID.recordset[0];
+dish.name= await pool
+.request()
+.query(
+  `SELECT first_name + ' ' + last_name AS name FROM customer_profile WHERE nationalID =${nationalID}`
+);
+dish.CashbackWallet = await CashbackWallet(nationalID);
+dish.activeBenefits = await activeBenefits();
+dish.notResolvedTickets = await notResolvedTickets(currMobileNo);
+dish.highestVoucher = await highestVoucher(currMobileNo);
+dish.topSuccPayments = await topSuccPayments(currMobileNo);
+dish.getShops = await getShops();
+dish.servicePlans5Months = await servicePlans5Months(currMobileNo);
+console.log(dish);
+return dish;
+}
+
+const cookDataAdmin = async () => {
+  const dish = {};
+  dish.allCustomerAccounts = await allCustomerAccounts();
+  dish.physicalStoreVouchers = await physicalStoreVouchers();
+  dish.allResolvedTickets = await allResolvedTickets();
+  dish.accountPlan = await accountPlan();
+  dish.customerWallet = await customerWallet();
+  dish.eShopVouchers = await eShopVouchers();
+  dish.accountPayments = await accountPayments();
+  dish.numCashback = await numCashback();
+  return dish;
+}
+
 let currMobileNo = "";
 app.get("/", (req, res) => {
-  res.render("login");
+  res.render("login", { invalid: false });
 });
 
 app.get("/customer", async (req, res) => {
-  res.render("customer", { currMobileNo });
+  const dish = await cookData(currMobileNo);
+  console.log(dish);
+  const name = dish.name.recordset[0].name;
+  res.render("customer", { dish , name});
 });
 
-app.get("/admin", (req, res) => {
-  res.render("admin");
+app.get("/admin", async(req, res) => {
+  const dish = await cookDataAdmin();
+  res.render("admin",{dish});
 });
 
 app.post("/", async (req, res) => {
@@ -81,9 +153,10 @@ app.post("/", async (req, res) => {
     const status = result.recordset[0].status;
     currMobileNo = mobileNo;
     if (status) {
+      cookData(currMobileNo)
       res.redirect("/customer");
     } else {
-      res.redirect("/");
+      res.render("login", { invalid: true });
     }
   }
 });
@@ -148,9 +221,7 @@ async function activeBenefits() {
     return result.recordset;
   } catch (err) {
     console.error("Error querying the view:", err);
-  } finally {
-    sql.close();
-  }
+  } 
 }
 
 async function notResolvedTickets(mobileNumber) {
@@ -169,9 +240,7 @@ async function notResolvedTickets(mobileNumber) {
     return result.recordset[0];
   } catch (err) {
     console.error("Error querying the view:", err);
-  } finally {
-    sql.close();
-  }
+  } 
 }
 
 async function highestVoucher(mobileNumber) {
@@ -185,9 +254,7 @@ async function highestVoucher(mobileNumber) {
     return result.recordset[0].voucherID;
   } catch (err) {
     console.error("Error querying the view:", err);
-  } finally {
-    sql.close();
-  }
+  } 
 }
 
 async function remAmount(paymentID, planID) {
@@ -204,9 +271,7 @@ async function remAmount(paymentID, planID) {
     return result.recordset[0].res;
   } catch (err) {
     console.error("Error querying the view:", err);
-  } finally {
-    sql.close();
-  }
+  } 
 }
 
 async function extraAmount(paymentID, planID) {
@@ -221,9 +286,7 @@ async function extraAmount(paymentID, planID) {
     return result.recordset[0].res;
   } catch (err) {
     console.error("Error querying the view:", err);
-  } finally {
-    sql.close();
-  }
+  } 
 }
 
 async function topSuccPayments(mobileNumber) {
@@ -237,9 +300,7 @@ async function topSuccPayments(mobileNumber) {
     return result.recordset;
   } catch (err) {
     console.error("Error querying the view:", err);
-  } finally {
-    sql.close();
-  }
+  } 
 }
 
 // customer 3
@@ -455,5 +516,5 @@ async function updatePoints(number) {
     .execute("Total_Points_Account");
 }
 
-app.listen(3000);
+app.listen(3030);
 // module.exports = app;

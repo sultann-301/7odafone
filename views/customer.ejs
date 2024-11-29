@@ -21,18 +21,20 @@
       display: grid;
       grid-template-columns: 30% 70%;
     }
-    
-    ul {
+    li{
+      color:#c7fffb;
+    }
+    .nav {
       background: #2e2a2a;
       padding: 20px 0 10px 10px;
       border-right: 5px solid #c7fffb;
       width: 150px;
-      height:100vh;
+      height:100%;
       transition: 0.5s;
       overflow: hidden;
     }
     
-    ul li {
+    .nav .nav-elem {
       list-style: none;
       padding: 15px;
       padding-right: 0;
@@ -51,12 +53,12 @@
       padding-right:10px;
     }
     
-    ul li:hover {
+    .nav .nav-elem:hover {
       transition: 0s;
       background: #1c1f24;
     }
     
-    ul li.active:before {
+    .nav .nav-elem.active:before {
       content: '';
       position: absolute;
       top:-20px;
@@ -68,7 +70,7 @@
       box-shadow: 10px 10px 0 #c7fffb;
     }
     
-    ul li.active:after {
+    .nav .nav-elem.active:after {
       content: '';
       position: absolute;
       bottom:-20px;
@@ -81,16 +83,16 @@
     
     }
     
-    ul li.active {
+    .nav .nav-elem.active {
       background: #c7fffb;
       color:#242932;
     }
     
-    ul:hover {
+    .nav:hover {
       width: 300px
     }
     
-    h2{
+    .title{
       margin-bottom: 60px;
       color: #c7fffb;
     }
@@ -98,23 +100,22 @@
 </head>
 <body>
   <div class="container">
-    <ul>
-      <h2> Welcome <%= currMobileNo %></h2>
-      <li class="active">Home</li>
-      <li>My Wallet</li>
-      <li>Offered Plans</li>
-      <li>My Benefits</li>
-      <li>Shops</li>
+    <ul class="nav">
+      <h2 class="title"> Welcome <%= name %></h2>
+      <li class=" nav-elem active">Home</li>
+      <li class=" nav-elem">My Wallet</li>
+      <li class=" nav-elem">Offered Plans</li>
+      <li class=" nav-elem">My Benefits</li>
+      <li class=" nav-elem">Shops</li>
     </ul>
   </div>
   <script> let items = document.querySelectorAll('li');
-
     items.forEach(item => {
       item.addEventListener('click', () => {
          items.forEach(item => item.classList.remove('active'))
           item.classList.add('active')
-    
       })
-    })</script>
+    })
+    </script>
 </body>
 </html>
