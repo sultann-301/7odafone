@@ -31,6 +31,7 @@ const config = {
     encrypt: true, // Enable encryption
     trustServerCertificate: true, // Accept self-signed certificates
   },
+
 };
 
 // async function fetchData() {
@@ -214,6 +215,24 @@ app.post("/", async (req, res) => {
     }
   }
 });
+
+
+app.get("/benefits", async(req, res) => {
+  const benefit = await activeBenefits();
+  res.render("benefits",{benefit,currMobileNo});
+});
+
+app.get("/plans", async(req, res) => {
+  const service = await allServicePlans();
+  const unsub = await unsubscribedPlans(currMobileNo)
+  res.render("plans",{service,unsub});
+});
+
+app.get("/wallet", async(req, res) => {
+  const benefit = await activeBenefits();
+  res.render("wallet");
+});
+
 
 // customer 1
 
