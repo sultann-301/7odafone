@@ -222,6 +222,8 @@ app.get("/benefits", async(req, res) => {
   res.render("benefits",{benefit,currMobileNo});
 });
 
+
+
 app.get("/plans", async(req, res) => {
   const service = await allServicePlans();
   const unsub = await unsubscribedPlans(currMobileNo)
