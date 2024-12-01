@@ -32,6 +32,8 @@ const config = {
     trustServerCertificate: true, // Accept self-signed certificates
   },
 
+
+  
 };
 
 // async function fetchData() {
