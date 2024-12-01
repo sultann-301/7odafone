@@ -26,7 +26,7 @@ const config = {
   user: "sa",
   password: "dockerStrongPwd123",
   server: "localhost",
-  database: "Telecom_Team_5",
+  database: "Telecom_Team_4",
   options: {
     encrypt: true, // Enable encryption
     trustServerCertificate: true, // Accept self-signed certificates

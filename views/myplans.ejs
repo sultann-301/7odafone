@@ -8,7 +8,7 @@
  @import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700;800;900&display=swap');
 
-*{
+ *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -17,72 +17,96 @@
   
   body {
     height: 100vh;
-    background: #1e1b1b;
+    background: #131315;
     display: grid;
-    grid-template-columns: 25% 70%;
+    grid-template-columns: 20% 80%;
+  }
+  a{
+    text-decoration: none;
   }
   .cont{
-  width:200px;
+   width:200px;
   }
   .main{
     width:100%;
     height:100%;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    flex-direction: column;
   }
   .carousel{
-  display:flex;
-  flex-direction: row;
-  width:100%;
-  height:100%;
-  justify-content: center;
-  align-items: center;
-  margin-left:-5%;
+    display:flex;
+    flex-direction: row;
+    width:100%;
+    height:100%;
+    justify-content: center;
+    align-items: center;
+    margin-left:-6%;
+    margin-top: 5%;
   }
   .headers{
-  display:flex;
-  justify-content: space-between;
-  color:#c7fffb;
-  padding:10px;
+    display:flex;
+    justify-content:end;
+    color:#c7fffb;
+    padding:10px;
+    position:sticky;
+    width:100%;
+    margin-top:20px;
   }
   .wel{
-    margin-left:30%;
+    margin-left:32%;
+    letter-spacing: 2px;
   }
   .logo{
    color:#645e5e;
    font-weight: bolder;
    letter-spacing: 2px;
+   margin-left:-2%;
   }
 
   .arrow{
+    position:sticky;
     color:#c7fffb;
     font-size:40px;
-    margin-top:-5%;
+    margin-top:-40%;
+    cursor: pointer;
   }
   .left-arrow{
-    margin-left: -7%;
+    margin-right: 5%;
   }
   .right-arrow{
-    margin-right: -7%;
+    margin-left: 5%;
   }
   li{
     color:#c7fffb;
   }
   .nav {
-    background: #2e2a2a;
+    background: #1d1d1f;
     padding: 20px 0 10px 10px;
     border-right: 5px solid #c7fffb;
     width: 150px;
     height:100vh;
     transition: 0.5s;
     overflow: hidden;
+    position: fixed;
   }
-  
+  .nav h2{
+    font-size: 15px;
+    color:#c7fffb;
+    margin-bottom:30px;
+    border-bottom:3px solid  #0b3b3f;
+    border-top:3px solid  #0b3b3f;
+    margin-left:0;
+    text-align: center;
+  }
   .nav .nav-elem {
     list-style: none;
     padding: 15px;
     padding-right: 0;
-    color: #effefd;
+    color: #c7fffb;
     font-size: 15px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     cursor: pointer;
     position: relative;
     transition: 0.5s;
@@ -97,7 +121,7 @@
   
   .nav .nav-elem:hover {
     transition: 0s;
-    background: #1c1f24;
+    background: #2d3138;
   }
   
   .nav .nav-elem.active:before {
@@ -126,11 +150,11 @@
   
   .nav .nav-elem.active {
     background: #c7fffb;
-    color:#242932;
+    color:#26656a;
   }
   
   .nav:hover {
-    width: 300px;
+    width: 250px;
   }
   
   .title{
@@ -147,19 +171,27 @@
     align-items: center;
   }
 #plan{
-   font-size:25px;
-   color:#c7fffb;
-   margin-bottom:10%;
+  font-size:20px;
+  color:#c7fffb;
+  margin-left:-5%;
+  margin-bottom:6%;
+  background-color: transparent;
+  border-bottom:3px solid  #0b3b3f;
+  width:200px;
+  padding:10px;
+  text-align: center; 
+  letter-spacing: 1px;
 }
 .container {
   width: 100%;
-  min-height: 100vh;
+  height:450px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 80px 100px;
   overflow: hidden;
   background: transparent;
+  margin-left: -4%;
 }
 
 .box {
@@ -200,28 +232,6 @@
   width: 100%;
   height: 100%;
   background:tranpsarent;
-}
-
-.box .shadow::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: calc(100% + 5px);
-  width: 100%;
-  height: 200%;
-  background: linear-gradient(rgba(0,0,0,0.075), transparent);
-  transform: skewX(45deg);
-}
-
-.box .shadow::after {
-  content: '';
-  position: absolute;
-  bottom: -200%;
-  left: calc(100% + 15px);
-  width: 100%;
-  height: 200%;
-  background: linear-gradient(rgba(0,0,0,0.075), transparent);
-  transform: skewX(45deg);
 }
 
 .box .content {
@@ -268,7 +278,7 @@
   height: 100%;
   fill: transparent;
   stroke-width: 3;
-  stroke: rgba(0,0,0,0.05);
+  stroke: #093134;
   transform: translate(5px, 5px);
 }
 
@@ -306,6 +316,12 @@
   }
 }
 
+.back{
+border-radius: 50%;
+background-color: #191a1b;
+z-index: -2;
+}
+
 .box .content .percent .dot::before {
   content: '';
   position: absolute;
@@ -324,6 +340,8 @@
   opacity: 0;
   animation: fadeIn 1s linear forwards;
   animation-delay: 2.5s;
+  margin-top:25px;
+  margin-left:5px;
 }
 
 .box .content .number h2 {
@@ -335,6 +353,82 @@
   font-weight: 300;
   font-size: 1.5rem;
 }
+.input-container{
+  display:flex;
+  flex-direction: row;
+  width:300px;
+  height:35px;
+  border-radius:1rem ;
+  background-color: transparent;
+  border:2px solid #50f8f3;
+  margin-left:-8px;
+}
+
+input {
+  outline: none;
+  outline-style: none;
+}
+
+.inputs{
+  width:100%;
+  height:95%;
+  border-radius:1rem;
+  background-color: transparent;
+  font-size: 15px;
+  color:#effefd;
+  border:none;
+  padding-left:15px;
+}
+
+.inputs::placeholder{
+  font-size:15px;
+  margin-left: 30px;
+  background-color: transparent;
+}
+
+button{
+  width: 100px;
+  height: 30px;
+  border-radius: 1rem;
+  border:none;
+  background-color: #50f8f3;
+  color: #100e0e;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover{
+  background-color: #232020;
+  color: #50f8f3;
+  border: 2px solid #50f8f3;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.5s;
+}
+form{
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width:90%;
+  gap:20px;
+  margin-left:-6%;
+}
+  .space{
+    width:25px;
+}
+label{
+  color:#c7fffb;
+  width:100px;
+  margin-left: 5px;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+      background-color: white; /* Change the background color */
+      color: black;            /* Change the icon color */
+      padding: 5px;            /* Add some padding */
+      border-radius: 50%;      /* Optional: Make it rounded */
+      margin-left: -5px;
+    }
     </style>
 </head>
 <body>
@@ -350,29 +444,25 @@
   </div>
   <div class="main">
   <div class="headers">
-    <h2 class="wel"> Welcome <%= name %></h2>
     <div class="logo">7ODAFONE</div>
   </div>
   <div class="carousel">
-  <div class="left-arrow arrow" onclick="shift('left')"><</div>
   <div class="items">
     <div id="plan"></div>
     <div class="container"></div>
   </div>
-  <div class="right-arrow arrow" onclick="shift('right')">></div>
  </div>
  <form method="post">
   <div class="wrapper">
-   <h2>Enter</h2>
-   <div class="space"></div>
-   <h2>Date</h2>
   </div>
   <div class="input-container"> 
-    <input class="inputs" placeholder="Plan Name" type="text" name="plan" id="plan" required>
+    <input class="inputs" placeholder="Plan Name" type="text" name="plan" id="plann" required>
   </div>
+  <label>Start Date: </label>
   <div class="input-container"> 
     <input class="inputs" placeholder="Start Date" type="date" name="startDate" id="start" required>
   </div>
+  <label>End Date: </label>
   <div class="input-container">
     <input class="inputs" placeholder="End Date" type="date" name="endDate" id="end" required>
   </div>
@@ -380,16 +470,7 @@
   </form>
   </div>
 
-  <script>
-    let planNames=['Basic','Standard','Premium'];
-    let items = document.querySelectorAll('li');
-    items.forEach(item => {
-      item.addEventListener('click', () => {
-         items.forEach(item => item.classList.remove('active'))
-          item.classList.add('active')
-      })
-    })
-
+  <script>s
     let displayInd=0
     const values2 = '<%- JSON.stringify(usages) %>';
     const values = JSON.parse(values2)

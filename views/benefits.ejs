@@ -6,90 +6,155 @@
     <title>Shops</title>
     <style>
         @import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
-    *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Roboto, sans-serif;
-    }
-    
-    
-    body {
-      height: 100vh;
-      background: #1e1b1b;
-      display: grid;
-      grid-template-columns: 30% 70%;
-    }
-    li{
-      color:#c7fffb;
-    }
-    .nav {
-      background: #2e2a2a;
-      padding: 20px 0 10px 10px;
-      border-right: 5px solid #c7fffb;
-      width: 150px;
-      height:100%;
-      transition: 0.5s;
-      overflow: hidden;
-    }
-    
-    .nav .nav-elem {
-      list-style: none;
-      padding: 15px;
-      padding-right: 0;
-      color: #effefd;
-      font-size: 15px;
-      margin-bottom: 10px;
-      cursor: pointer;
-      position: relative;
-      transition: 0.5s;
-      border-top-left-radius: 20px;
-      border-bottom-left-radius: 20px;
-      font-weight: bold;
-      display: flex;
-      justify-content: center;
-      letter-spacing: 1px;
-      padding-right:10px;
-    }
-    
-    .nav .nav-elem:hover {
-      transition: 0s;
-      background: #1c1f24;
-    }
-    
-    .nav .nav-elem.active:before {
-      content: '';
-      position: absolute;
-      top:-20px;
-      right: 0px;
-      width: 20px;
-      height:20px;
-      background: transparent;
-      border-radius: 50%;
-      box-shadow: 10px 10px 0 #c7fffb;
-    }
-    
-    .nav .nav-elem.active:after {
-      content: '';
-      position: absolute;
-      bottom:-20px;
-      right: 0px;
-      width: 20px;
-      height:20px;
-      background: transparent;
-      border-radius: 50%;
-      box-shadow: 10px -10px 0 #c7fffb;
-    
-    }
-    
-    .nav .nav-elem.active {
-      background: #c7fffb;
-      color:#242932;
-    }
-    
-    .nav:hover {
-      width: 300px
-    }
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700;800;900&display=swap');
+        *{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Roboto, sans-serif;
+  }
+  
+  body {
+    height: 100vh;
+    background: #131315;
+    display: grid;
+    grid-template-columns: 20% 80%;
+  }
+  a{
+    text-decoration: none;
+  }
+  .cont{
+   width:200px;
+  }
+  .main{
+    width:100%;
+    height:100%;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    flex-direction: column;
+  }
+  .carousel{
+    display:flex;
+    flex-direction: row;
+    width:100%;
+    height:100%;
+    justify-content: center;
+    align-items: center;
+    margin-left:-6%;
+    margin-top: 5%;
+  }
+  .headers{
+    display:flex;
+    justify-content:end;
+    color:#c7fffb;
+    padding:10px;
+    position:sticky;
+    width:100%;
+    margin-top:20px;
+  }
+  .wel{
+    margin-left:32%;
+    letter-spacing: 2px;
+  }
+  .logo{
+   color:#645e5e;
+   font-weight: bolder;
+   letter-spacing: 2px;
+   margin-left:-2%;
+  }
+
+  .arrow{
+    position:sticky;
+    color:#c7fffb;
+    font-size:40px;
+    margin-top:-40%;
+    cursor: pointer;
+  }
+  .left-arrow{
+    margin-right: 5%;
+  }
+  .right-arrow{
+    margin-left: 5%;
+  }
+  li{
+    color:#c7fffb;
+  }
+  .nav {
+    background: #1d1d1f;
+    padding: 20px 0 10px 10px;
+    border-right: 5px solid #c7fffb;
+    width: 150px;
+    height:100vh;
+    transition: 0.5s;
+    overflow: hidden;
+    position: fixed;
+  }
+  .nav h2{
+    font-size: 15px;
+    color:#c7fffb;
+    margin-bottom:30px;
+    border-bottom:3px solid  #0b3b3f;
+    border-top:3px solid  #0b3b3f;
+    margin-left:0;
+    text-align: center;
+  }
+  .nav .nav-elem {
+    list-style: none;
+    padding: 15px;
+    padding-right: 0;
+    color: #c7fffb;
+    font-size: 15px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    position: relative;
+    transition: 0.5s;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    letter-spacing: 1px;
+    padding-right:10px;
+  }
+  
+  .nav .nav-elem:hover {
+    transition: 0s;
+    background: #2d3138;
+  }
+  
+  .nav .nav-elem.active:before {
+    content: '';
+    position: absolute;
+    top:-20px;
+    right: 0px;
+    width: 20px;
+    height:20px;
+    background: transparent;
+    border-radius: 50%;
+    box-shadow: 10px 10px 0 #c7fffb;
+  }
+  
+  .nav .nav-elem.active:after {
+    content: '';
+    position: absolute;
+    bottom:-20px;
+    right: 0px;
+    width: 20px;
+    height:20px;
+    background: transparent;
+    border-radius: 50%;
+    box-shadow: 10px -10px 0 #c7fffb;
+  }
+  
+  .nav .nav-elem.active {
+    background: #c7fffb;
+    color:#26656a;
+  }
+  
+  .nav:hover {
+    width: 250px;
+  }
     
     .title{
       margin-bottom: 60px;
@@ -125,17 +190,16 @@
     </style>
 </head>
 <body>
-
-    <div class="container"> 
-        <ul class="nav">
-            <a href="/customer" class=" nav-elem ">Home</a>
-            <a href="/wallet" class=" nav-elem">My Wallet</a>
-            <a href="/plans" class=" nav-elem">Offered Plans</a>
-            <a href="/benefits" class=" nav-elem active">My Benefits</a>
-            <a href="/shops" class=" nav-elem">Shops</a>
-        </ul>
-      </div>
-
+  <div class="cont">
+    <ul class="nav">
+      <a href="/customer" class=" nav-elem">Home</a>
+      <a href="/wallet" class=" nav-elem">My Wallet</a>
+      <a href="/plans" class=" nav-elem">Offered Plans</a>
+      <a href="/benefits" class=" nav-elem active">My Benefits</a>
+      <a href="/shops" class=" nav-elem">Shops</a>
+      <a href="/myplans" class=" nav-elem">Plan Search</a>
+    </ul>
+  </div>
       <div class="benefitsContainer">
         <% for( let i = 0; i < benefit.length; i++ ) { %>
             <% if (benefit[i].mobileNo==currMobileNo) { %>
@@ -149,26 +213,8 @@
             <% } %>
           
         <% } %>
-
-
       </div>
-
-
-
-
-
-
-
-
       <script>
-      // get the shops from ejs
-      let items = document.querySelectorAll('a');
-        items.forEach(item => {
-          item.addEventListener('click', () => {
-             items.forEach(item => item.classList.remove('active'))
-              item.classList.add('active')
-          })
-        })
         </script>
 
 
