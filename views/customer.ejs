@@ -102,16 +102,17 @@
   <div class="container">
     <ul class="nav">
       <h2 class="title"> Welcome <%= name %></h2>
-      <li class=" nav-elem active">Home</li>
-      <li class=" nav-elem">My Wallet</li>
-      <li class=" nav-elem">Offered Plans</li>
-      <li class=" nav-elem">My Benefits</li>
-      <li class=" nav-elem">Shops</li>
+      <a href="/customer" class=" nav-elem active">Home</a>
+      <a href="/wallet" class=" nav-elem">My Wallet</a>
+      <a href="/plans" class=" nav-elem">Offered Plans</a>
+      <a href="/benefits" class=" nav-elem">My Benefits</a>
+      <a href="/shops" class=" nav-elem">Shops</a>
     </ul>
   </div>
   <script> let items = document.querySelectorAll('li');
     items.forEach(item => {
       item.addEventListener('click', () => {
+
          items.forEach(item => item.classList.remove('active'))
           item.classList.add('active')
       })

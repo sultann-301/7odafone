@@ -138,19 +138,21 @@
       </div>
 
       <div class="shopContainer">
-        <% for( let i = 0; i < shops.length; i++ ) { %>
-          <div class = 'shopBox'>
-            <h2>
-              Name : <%= shops[i].name %>
-            </h2>
-            <h3>
-              Category : <%= shops[i].Category %>
-            </h3>
-          </div>
-        <% } %>
+
 
 
       </div>
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -168,6 +170,31 @@
               item.classList.add('active')
           })
         })
+        const shopContainer = document.querySelector(".shopContainer")
+        for(let i = 0; i<=3; i++)
+        {
+            //creating shopBox
+            const shopBox = document.createElement('div')
+            shopBox.classList.add('shopBox')
+            //creating shopName element
+            const shopName = document.createElement('h2')
+            shopName.innerText = `Shop ${i}`  //replace with ejs put shopname here
+            // end 
+
+            const shopCategory = document.createElement('h3')
+            shopCategory.innerText = `Insert {Category Here}`
+            if(i == 3){
+                shopBox.id = "hello"
+            }
+            // end 
+            
+
+
+
+            shopBox.append(shopName)
+            shopBox.append(shopCategory)
+            shopContainer.appendChild(shopBox)
+        }
         </script>
 
 

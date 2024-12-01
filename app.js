@@ -26,7 +26,7 @@ const config = {
   user: "sa",
   password: "dockerStrongPwd123",
   server: "localhost",
-  database: "Telecom_Team_6",
+  database: "Telecom_Team_5",
   options: {
     encrypt: true, // Enable encryption
     trustServerCertificate: true, // Accept self-signed certificates
@@ -104,6 +104,10 @@ console.log(dish);
 return dish;
 }
 
+cookData('01234567892')
+
+
+
 const cookDataAdmin = async () => {
   const dish = {};
   dish.allCustomerAccounts = await allCustomerAccounts();
@@ -132,6 +136,13 @@ app.get("/customer", async (req, res) => {
 app.get("/admin", async(req, res) => {
   const dish = await cookDataAdmin();
   res.render("admin",{dish});
+});
+
+app.get("/shops", async(req, res) => {
+  const dish = await cookData(currMobileNo);
+  const shops = dish.getShops
+  const name = dish.name.recordset[0].name;
+  res.render("shops",{shops, name});
 });
 
 app.post("/", async (req, res) => {
@@ -225,7 +236,7 @@ async function activeBenefits() {
 }
 
 async function notResolvedTickets(mobileNumber) {
-  try {
+
     const pool = await sql.connect(config);
     const nationalIDres = await pool
       .request()
@@ -237,24 +248,27 @@ async function notResolvedTickets(mobileNumber) {
       .request()
       .input("NID", sql.Int, nationalID)
       .execute("Ticket_Account_Customer");
-    return result.recordset[0];
-  } catch (err) {
-    console.error("Error querying the view:", err);
-  } 
+      
+    if (result.recordset[0]) return result.recordset[0]
+    else{
+      return {}
+    }
+  
 }
 
 async function highestVoucher(mobileNumber) {
-  try {
     const pool = await sql.connect(config);
 
     const result = await pool
       .request()
       .input("mobile_num", sql.Char, mobileNumber)
       .execute("Account_Highest_Voucher");
-    return result.recordset[0].voucherID;
-  } catch (err) {
-    console.error("Error querying the view:", err);
-  } 
+    if (result.recordset[0]) return result.recordset[0].voucherID;
+    else{
+      console.log('null')
+    }
+    
+  
 }
 
 async function remAmount(paymentID, planID) {
