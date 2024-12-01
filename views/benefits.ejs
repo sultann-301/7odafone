@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shops</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Roboto, sans-serif;
+    }
+    
+    
+    body {
+      height: 100vh;
+      background: #1e1b1b;
+      display: grid;
+      grid-template-columns: 30% 70%;
+    }
+    li{
+      color:#c7fffb;
+    }
+    .nav {
+      background: #2e2a2a;
+      padding: 20px 0 10px 10px;
+      border-right: 5px solid #c7fffb;
+      width: 150px;
+      height:100%;
+      transition: 0.5s;
+      overflow: hidden;
+    }
+    
+    .nav .nav-elem {
+      list-style: none;
+      padding: 15px;
+      padding-right: 0;
+      color: #effefd;
+      font-size: 15px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      position: relative;
+      transition: 0.5s;
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      letter-spacing: 1px;
+      padding-right:10px;
+    }
+    
+    .nav .nav-elem:hover {
+      transition: 0s;
+      background: #1c1f24;
+    }
+    
+    .nav .nav-elem.active:before {
+      content: '';
+      position: absolute;
+      top:-20px;
+      right: 0px;
+      width: 20px;
+      height:20px;
+      background: transparent;
+      border-radius: 50%;
+      box-shadow: 10px 10px 0 #c7fffb;
+    }
+    
+    .nav .nav-elem.active:after {
+      content: '';
+      position: absolute;
+      bottom:-20px;
+      right: 0px;
+      width: 20px;
+      height:20px;
+      background: transparent;
+      border-radius: 50%;
+      box-shadow: 10px -10px 0 #c7fffb;
+    
+    }
+    
+    .nav .nav-elem.active {
+      background: #c7fffb;
+      color:#242932;
+    }
+    
+    .nav:hover {
+      width: 300px
+    }
+    
+    .title{
+      margin-bottom: 60px;
+      color: #c7fffb;
+    }
+
+
+    .benefitsContainer{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items:stretch;
+        color: white;
+        margin-right: 30%;
+    }
+
+    .benefitBox
+    {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+        font-size: 20px;
+        border:  3px solid #c7fffb ;
+        text-align: center;
+        border-radius: 25px;
+        padding: 40px;
+    }
+
+    .benefitBox h2{
+        padding-bottom: 10px;
+    }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <ul class="nav">
+            <a href="/customer" class=" nav-elem ">Home</a>
+            <a href="/wallet" class=" nav-elem">My Wallet</a>
+            <a href="/plans" class=" nav-elem">Offered Plans</a>
+            <a href="/benefits" class=" nav-elem active">My Benefits</a>
+            <a href="/shops" class=" nav-elem">Shops</a>
+        </ul>
+      </div>
+
+      <div class="benefitsContainer">
+        <% for( let i = 0; i < benefit.length; i++ ) { %>
+            <% if (benefit[i].mobileNo==currMobileNo) { %>
+                <div class = 'benefitBox'>
+                    <h2> ID : <%= benefit[i].benefitID %> </h2>
+                    <h4> <%= benefit[i].description %></h4>
+                    <p><%= benefit[i].validity_date %></p>
+                  </div>
+            <% } %>
+          
+        <% } %>
+
+
+      </div>
+
+
+
+
+
+
+
+
+      <script>
+      // get the shops from ejs
+      let items = document.querySelectorAll('a');
+        items.forEach(item => {
+          item.addEventListener('click', () => {
+             items.forEach(item => item.classList.remove('active'))
+              item.classList.add('active')
+          })
+        })
+        </script>
+
+
+        
+    
+</body>
+</html>
