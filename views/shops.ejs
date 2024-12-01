@@ -30,7 +30,7 @@
   .main{
     width:100%;
     height:100%;
-    display: flex;
+    display: inline;
     justify-content: center;
     align-items:center;
     flex-direction: column;
@@ -156,11 +156,37 @@
   .nav:hover {
     width: 250px;
   }
+  .shopContainer{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items:stretch;
+      color: white;
+      margin-right: 30%;
+      margin-top: 10%; 
+  }
+
+  .shopBox
+  {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+      font-size: 20px;
+      border:  3px solid #c7fffb ;
+      text-align: center;
+      border-radius: 25px;
+      padding: 40px;
+  }
+
+  .shopBox h2{
+      padding-bottom: 10px;
+  }
     </style>
 </head>
 <body>
   <div class="cont">
     <ul class="nav">
+      <h2 class="wel"><%= name %></h2>
       <a href="/customer" class=" nav-elem">Home</a>
       <a href="/wallet" class=" nav-elem">My Wallet</a>
       <a href="/plans" class=" nav-elem">Offered Plans</a>

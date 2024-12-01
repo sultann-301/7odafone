@@ -26,7 +26,7 @@ const config = {
   user: "sa",
   password: "dockerStrongPwd123",
   server: "localhost",
-  database: "Telecom_Team_4",
+  database: "Telecom_Team_5",
   options: {
     encrypt: true, // Enable encryption
     trustServerCertificate: true, // Accept self-signed certificates
@@ -221,7 +221,9 @@ app.post("/", async (req, res) => {
 
 app.get("/benefits", async(req, res) => {
   const benefit = await activeBenefits();
-  res.render("benefits",{benefit,currMobileNo});
+  const dish = await cookData(currMobileNo);
+  const name = dish.name.recordset[0].name;
+  res.render("benefits",{benefit,currMobileNo,name});
 });
 
 
@@ -229,11 +231,13 @@ app.get("/benefits", async(req, res) => {
 app.get("/plans", async(req, res) => {
   const service = await allServicePlans();
   const unsub = await unsubscribedPlans(currMobileNo)
-  res.render("plans",{service,unsub});
+  const dish = await cookData(currMobileNo);
+  const name = dish.name.recordset[0].name;
+  res.render("plans",{service,unsub, name});
 });
 
 app.get("/wallet", async(req, res) => {
-  const benefit = await activeBenefits();
+  
   res.render("wallet");
 });
 
