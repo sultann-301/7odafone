@@ -1,3 +1,4 @@
+@ -0,0 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -97,7 +98,7 @@
     }
 
 
-    .benefitsContainer{
+    .plansContainer{
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
@@ -106,7 +107,7 @@
         margin-right: 30%;
     }
 
-    .benefitBox
+    .plansBox
     {
         display: flex;
         flex-direction: column;
@@ -118,7 +119,7 @@
         padding: 40px;
     }
 
-    .benefitBox h2{
+    .plansBox h2{
         padding-bottom: 10px;
     }
 
@@ -130,23 +131,38 @@
         <ul class="nav">
             <a href="/customer" class=" nav-elem ">Home</a>
             <a href="/wallet" class=" nav-elem">My Wallet</a>
-            <a href="/plans" class=" nav-elem">Offered Plans</a>
-            <a href="/benefits" class=" nav-elem active">My Benefits</a>
+            <a href="/plans" class=" nav-elem active">Offered Plans</a>
+            <a href="/benefits" class=" nav-elem ">My Benefits</a>
             <a href="/shops" class=" nav-elem">Shops</a>
         </ul>
       </div>
 
-      <div class="benefitsContainer">
-        <% for( let i = 0; i < benefit.length; i++ ) { %>
-            <% if (benefit[i].mobileNo==currMobileNo) { %>
-                <div class = 'benefitBox'>
-                    <h2> ID : <%= benefit[i].benefitID %> </h2>
-                    <h4> <%= benefit[i].description %></h4>
-                    <p><%= benefit[i].validity_date %></p>
+      <div class="plansContainer">
+        <% for( let i = 0; i < service.length; i++ ) { %>
+                <div class = 'plansBox'>
+                  <% for( let index = 0; index < unsub.length; index++ ) { %>
+                    <% if (service[i].planID === unsub[index].planID) { %>
+                      <h2><%= service[i].name %> Subscribed</h2>
+                      <h3>Price: <%= service[i].price %> $</h3>
+                      <h4> SMS: <%= service[i].SMS_offered %></h4>
+                      <h4> Minutes: <%= service[i].minutes_offered %></h4>
+                      <h4> Data: <%= service[i].data_offered %> GB</h4>
+                      <p><%= service[i].description %></p>
+                      <% break; %>
+                      <% } else { %>
+                        <h2><%= service[i].name %> Unsubscribed</h2>
+                        <h3>Price: <%= service[i].price %> $</h3>
+                        <h4> SMS: <%= service[i].SMS_offered %></h4>
+                        <h4> Minutes: <%= service[i].minutes_offered %></h4>
+                        <h4> Data: <%= service[i].data_offered %> GB</h4>
+                        <p><%= service[i].description %></p>
+                        <% break %>
+                    <% } %>
+                    
+                     
+                    <% } %>
                   </div>
             <% } %>
-          
-        <% } %>
 
 
       </div>
@@ -159,7 +175,6 @@
 
 
       <script>
-      // get the shops from ejs
       let items = document.querySelectorAll('a');
         items.forEach(item => {
           item.addEventListener('click', () => {
