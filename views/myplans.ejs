@@ -340,12 +340,12 @@
 <body>
   <div class="cont">
     <ul class="nav">
-      <a href="/customer" class=" nav-elem active">Home</a>
+      <a href="/customer" class=" nav-elem">Home</a>
       <a href="/wallet" class=" nav-elem">My Wallet</a>
       <a href="/plans" class=" nav-elem">Offered Plans</a>
       <a href="/benefits" class=" nav-elem">My Benefits</a>
       <a href="/shops" class=" nav-elem">Shops</a>
-      <a href="/myplans" class=" nav-elem">Plan Search</a>
+      <a href="/myplans" class=" nav-elem active">Plan Search</a>
     </ul>
   </div>
   <div class="main">
@@ -361,7 +361,24 @@
   </div>
   <div class="right-arrow arrow" onclick="shift('right')">></div>
  </div>
-</div>
+ <form method="post">
+  <div class="wrapper">
+   <h2>Enter</h2>
+   <div class="space"></div>
+   <h2>Date</h2>
+  </div>
+  <div class="input-container"> 
+    <input class="inputs" placeholder="Plan Name" type="text" name="plan" id="plan" required>
+  </div>
+  <div class="input-container"> 
+    <input class="inputs" placeholder="Start Date" type="date" name="startDate" id="start" required>
+  </div>
+  <div class="input-container">
+    <input class="inputs" placeholder="End Date" type="date" name="endDate" id="end" required>
+  </div>
+  <button type="submit">Find</button>
+  </form>
+  </div>
 
   <script>
     let planNames=['Basic','Standard','Premium'];
