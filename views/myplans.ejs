@@ -448,10 +448,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     <div class="logo">7ODAFONE</div>
   </div>
   <div class="carousel">
+  <div class="left-arrow arrow" onclick="shift('left')"><</div>
   <div class="items">
     <div id="plan"></div>
     <div class="container"></div>
   </div>
+  <div class="right-arrow arrow" onclick="shift('right')">></div>
  </div>
  <form method="post">
   <div class="wrapper">
@@ -471,7 +473,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   </form>
   </div>
 
-  <script>s
+  <script>
     let displayInd=0
     const values2 = '<%- JSON.stringify(usages) %>';
     const values = JSON.parse(values2)

@@ -103,7 +103,6 @@ dish.highestVoucher = await highestVoucher(currMobileNo);
 dish.topSuccPayments = await topSuccPayments(currMobileNo);
 dish.getShops = await getShops();
 dish.servicePlans5Months = await servicePlans5Months(currMobileNo);
-console.log(dish)
 return dish;
 }
 
@@ -165,7 +164,7 @@ app.post("/myplans", async(req, res) => {
   const plan = req.body.plan
   const dish = await cookData(currMobileNo);
   const name = dish.name.recordset[0].name;
-  const usages = await Consumption(plan, start, end)
+  let usages = await Consumption(plan, start, end)
   for (let i = 0; i < usages.length; i++){
     for (let j = 0; j < dish.allServicePlans.length; j++){
       let plan = dish.allServicePlans[j] 
@@ -176,6 +175,12 @@ app.post("/myplans", async(req, res) => {
       }
     }
   }
+  if (usages.length == 0) usages = [{
+    name: 'No usages for this plan in this period',
+    data_consumption: 0,
+    minutes_used: 0,
+    SMS_sent: 0
+  }]
   res.render("myplans",{dish, name, usages});
 });
 
