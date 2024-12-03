@@ -247,11 +247,15 @@
         <h1>YOUR BALANCE: <%= dish.balance.recordset[0].current_balance %> DOLAZ</h1>
         <h2>YOUR CASHBACKS BOZO</h2>
         <% for( let i = 0; i < dish.CashbackWallet.length; i++ ) { %>
+                <% if (!dish.CashbackWallet[i].amount) { %>
+                    <% continue %>
+                <% } else { %>
                 <div class = 'cashbackBox'>
                     <h2> Cashback ID : <%= dish.CashbackWallet[i].cashbackID %> </h2>
                     <h4> Amount: <%= dish.CashbackWallet[i].amount %> $</h4>
                     <p><%= dish.CashbackWallet[i].credit_date.toUTCString().slice(0,16) %></p>
                   </div>   
+                  <% } %>
             <% } %>
 
             <div class="cashbackblabla">
