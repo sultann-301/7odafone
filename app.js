@@ -145,9 +145,9 @@ app.post("/myplans", async(req, res) => {
   res.render("myplans",{dish, name, usages});
 });
 
-app.get("/admin", async(req, res) => {
+app.get("/accountAdmin", async(req, res) => {
   const dish = await cookDataAdmin();
-  res.render("admin",{dish});
+  res.render("accountAdmin",{dish});
 });
 
 app.get("/shops", async(req, res) => {
@@ -165,7 +165,7 @@ app.post("/", async (req, res) => {
 
 
   if (mobileNo == "1" && password == "hamoksha") {
-    res.redirect("admin");
+    res.redirect("accountAdmin");
   } else {
     const result = await pool
       .request()
@@ -237,6 +237,7 @@ app.post('/wallet', async (req, res) =>{
     res.render("wallet", {dish, cashAcc: 0, success: 0});
   }
 })
+
 
 
 
