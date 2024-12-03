@@ -213,17 +213,18 @@ app.get("/plans", async(req, res) => {
 app.get("/wallet", async(req, res) => {
   const dish = await cookData(currMobileNo)
 
-  console.log(dish.CashbackWallet)
+  console.log(dish.balance.recordset[0].current_balance)
   res.render("wallet", {dish, success: 2});
 });
 
 
 
 app.post('/wallet', async (req, res) =>{
-  const benefitID = req.body.benefitID
+  const dish = await cookData(currMobileNo)
+  try{
+    const benefitID = req.body.benefitID
   const paymentID = req.body.paymentID
   const ree = await cashbackAccount(currMobileNo, paymentID, benefitID)
-  const dish = await cookData(currMobileNo)
   if(ree && ree > 0)
   {
     res.render("wallet", {dish, cashAcc: ree, success: 1});
@@ -231,10 +232,10 @@ app.post('/wallet', async (req, res) =>{
   {
     res.render("wallet", {dish, cashAcc: ree, success: 0});
   }
-  
-
-  
-
+  }
+  catch (err){
+    res.render("wallet", {dish, cashAcc: 0, success: 0});
+  }
 })
 
 
