@@ -184,7 +184,7 @@
 }
 .container {
   width: 100%;
-  min-height: 100vh;
+  max-height: 50%;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -291,6 +291,18 @@
   animation-delay: 2.5s;
 }
 
+.tickets{
+  display : flex;
+  font-size: 30px;
+  justify-content: flex-end;
+  width: 100%;
+  color: #c7fffb;
+  position: sticky;
+  bottom: 0;
+  padding-bottom: 20px;
+  padding-right: 50px;
+}
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -371,6 +383,40 @@ z-index: -2;
   font-size: 20px;
   height:50px;
 }
+.plansContainer{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items:stretch;
+      color: white;
+      margin-right: 30%;
+  }
+
+  .plansBox
+  {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+      margin-right: 115px;
+      font-size: 20px;
+      border:  3px solid #c7fffb ;
+      color: white;
+      text-align: center;
+      border-radius: 25px;
+      padding: 40px;
+  }
+
+  .plansBox h2{
+      padding-bottom: 10px;
+      color: white;
+  }
+
+  #fivemonths{
+    color: white;
+    margin-right: 115px;
+    text-align: center;
+    padding: 20px;
+  }
     </style>
 </head>
 <body>
@@ -383,6 +429,10 @@ z-index: -2;
       <a href="/benefits" class=" nav-elem">My Benefits</a>
       <a href="/shops" class=" nav-elem">Shops</a>
       <a href="/myplans" class=" nav-elem">Plan Search</a>
+      <a href="/vouchers" class=" nav-elem">My Vouchers</a>
+      <a href="/recharge" class=" nav-elem">Recharge</a>
+      <a href="/renew" class=" nav-elem">Renew</a>
+
     </ul>
   </div>
   <section>
@@ -400,7 +450,37 @@ z-index: -2;
   <div class="right-arrow arrow" onclick="shift('right')">></div>
  </div>
 </div>
+<h2 id = 'fivemonths'>
+Service plans YOU subscribed to in the last 5 months
+</h2>
+<% for( let i = 0; i < dish.servicePlans5Months.length; i++ ) { %>
+  <div class = 'plansBox'>
+        <h2><%= dish.servicePlans5Months[i].name %></h2>
+        <h3>Price: <%= dish.servicePlans5Months[i].price %> $</h3>
+        <h4> SMS: <%= dish.servicePlans5Months[i].SMS_offered %></h4>
+        <h4> Minutes: <%= dish.servicePlans5Months[i].minutes_offered %></h4>
+        <h4> Data: <%= dish.servicePlans5Months[i].data_offered %> GB</h4>
+        <p><%= dish.servicePlans5Months[i].description %></p>
+    </div>
+<% } %>
+<h2 id = 'fivemonths'>
+  YOUR top 10 successful payments
+</h2>
+<% for( let i = 0; i < dish.topSuccPayments.length; i++ ) { %>
+  <div class = 'plansBox'>
+        <h2>#<%= dish.topSuccPayments[i].paymentID %></h2>
+        <h4> Amount: <%= dish.topSuccPayments[i].amount %>$</h4>
+        <h4> Date: <%= dish.topSuccPayments[i].date_of_payment %></h4>
+        <h4> Payment Method: <%= dish.topSuccPayments[i].payment_method %> </h4>
+    </div>
+<% } %>
+<footer class = "tickets">
+  <div>
+    Number of unresolved tickets: <%= dish.notResolvedTickets[''] %>
+  </div> 
+</footer>
 </section>
+
   <script>
     let items = document.querySelectorAll('li');
     items.forEach(item => {

@@ -208,21 +208,22 @@
       <a href="/benefits" class=" nav-elem">My Benefits</a>
       <a href="/shops" class=" nav-elem">Shops</a>
       <a href="/myplans" class=" nav-elem">Plan Search</a>
+      <a href="/vouchers" class=" nav-elem">My Vouchers</a>
+      <a href="/recharge" class=" nav-elem">Recharge</a>
+      <a href="/renew" class=" nav-elem">Renew</a>
     </ul>
   </div>
 
       <div class="plansContainer">
         <% for( let i = 0; i < service.length; i++ ) { %>
                 <div class = 'plansBox'>
-                  <% for( let index = 0; index < unsub.length; index++ ) { %>
-                    <% if (service[i].planID === unsub[index].planID) { %>
+                    <% if (! unsubIDs.includes(service[i].planID)) { %>
                       <h2><%= service[i].name %> Subscribed</h2>
                       <h3>Price: <%= service[i].price %> $</h3>
                       <h4> SMS: <%= service[i].SMS_offered %></h4>
                       <h4> Minutes: <%= service[i].minutes_offered %></h4>
                       <h4> Data: <%= service[i].data_offered %> GB</h4>
                       <p><%= service[i].description %></p>
-                      <% break; %>
                       <% } else { %>
                         <h2><%= service[i].name %> Unsubscribed</h2>
                         <h3>Price: <%= service[i].price %> $</h3>
@@ -230,11 +231,9 @@
                         <h4> Minutes: <%= service[i].minutes_offered %></h4>
                         <h4> Data: <%= service[i].data_offered %> GB</h4>
                         <p><%= service[i].description %></p>
-                        <% break %>
                     <% } %>
                     
                      
-                    <% } %>
                   </div>
             <% } %>
 

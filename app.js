@@ -31,60 +31,18 @@ const config = {
     encrypt: true, // Enable encryption
     trustServerCertificate: true, // Accept self-signed certificates
   },
-
-
   
 };
 
-// async function fetchData() {
-//   try {
-//     const pool = await sql.connect(config);
 
-//     // Execute a query
-//     const result = await pool.request().query('SELECT * FROM Customer_account');
-
-//     // Access rows
-//     console.log(result.recordset); // Array of rows
-//     console.log(result.rowsAffected); // Number of rows affected
-//   } catch (err) {
-//     console.error('SQL error:', err);
-//   } finally {
-//     sql.close(); // Always close the connection
-//   }
-// }
-
-/*<div>
-    <% function renderObject(obj) { %>
-      <% if (Array.isArray(obj)) { %>
-        <ul>
-          <% obj.forEach(item => { %>
-            <li><%= renderObject(item) %></li>
-          <% }) %>
-        </ul>
-      <% } else if (typeof obj === 'object' && obj !== null) { %>
-        <ul>
-          <% Object.keys(obj).forEach(key => { %>
-            <li>
-              <strong><%= key %>:</strong>
-              <%= renderObject(obj[key]) %>
-            </li>
-          <% }) %>
-        </ul>
-      <% } else { %>
-        <span><%= obj %></span>
-      <% } %>
-    <% } %>
-    <div>
-      <% renderObject(dish); %>
-    </div>
-  </div>
-  */
 const cookData = async (currMobileNo) => {
 const dish={};
 dish.allServicePlans = await allServicePlans();
 dish.unsubscribedPlans = await unsubscribedPlans(currMobileNo);
 dish.showUsage = await showUsage(currMobileNo);
 const pool=await sql.connect(config);
+const vouchers = await pool.request().query(`SELECT V.* FROM Voucher V WHERE V.mobileNo = ${currMobileNo}`)
+dish.vouchers = vouchers.recordset
 var NID = await pool
         .request()
         .query(
@@ -103,6 +61,7 @@ dish.highestVoucher = await highestVoucher(currMobileNo);
 dish.topSuccPayments = await topSuccPayments(currMobileNo);
 dish.getShops = await getShops();
 dish.servicePlans5Months = await servicePlans5Months(currMobileNo);
+console.log(dish)
 return dish;
 }
 
@@ -236,14 +195,74 @@ app.get("/benefits", async(req, res) => {
 app.get("/plans", async(req, res) => {
   const service = await allServicePlans();
   const unsub = await unsubscribedPlans(currMobileNo)
+  let unsubIDs = []
+  for (let i = 0; i < unsub.length; i++){
+    unsubIDs.push(unsub[i].planID)
+  }
   const dish = await cookData(currMobileNo);
   const name = dish.name.recordset[0].name;
-  res.render("plans",{service,unsub, name});
+  res.render("plans",{service,unsubIDs, name});
 });
 
 app.get("/wallet", async(req, res) => {
   
   res.render("wallet");
+});
+
+app.get("/recharge", async(req, res) => {
+  const dish = await cookData(currMobileNo)
+  res.render("recharge", {dish, name: dish.name.recordset[0].name, success : 2});
+});
+
+app.post("/recharge", async(req, res) => {
+  const dish = await cookData(currMobileNo)
+  const amount = req.body.amount
+  const method = req.body.method
+  const rows = await balanceRecharge(currMobileNo, amount, method)
+  if (rows && rows != 0){
+    res.render("recharge", {dish,name: dish.name.recordset[0].name, success : 1 });
+  }
+  else{
+    res.render("recharge", {dish, name: dish.name.recordset[0].name, success : 0 });
+  }
+});
+
+app.get("/renew", async(req, res) => {
+  const dish = await cookData(currMobileNo)
+  res.render("renew", {dish, name: dish.name.recordset[0].name, success : 2});
+});
+
+app.post("/renew", async(req, res) => {
+  const dish = await cookData(currMobileNo)
+  const amount = req.body.amount
+  const method = req.body.method
+  const plan = req.body.plan
+  const rows = await renewPlan(currMobileNo, amount, method, plan)
+  console.log(rows)
+  if (rows && rows != 0){
+    res.render("renew", {dish,name: dish.name.recordset[0].name, success : 1 });
+  }
+  else{
+    res.render("renew", {dish, name: dish.name.recordset[0].name, success : 0 });
+  }
+});
+
+app.get("/vouchers", async(req, res) => {
+  const dish = await cookData(currMobileNo)
+  res.render("vouchers", {dish, highest : dish.highestVoucher, name: dish.name.recordset[0].name, success : 2 });
+});
+
+app.post("/vouchers", async(req, res) => {
+  var voucher = req.body.voucher
+  const dish = await cookData(currMobileNo)
+  var rows = await redeemVoucher(currMobileNo, voucher)
+  if (rows && rows != 0){
+    res.render("vouchers", {dish, highest : dish.highestVoucher, name: dish.name.recordset[0].name, success : 1 });
+  }
+  else{
+    res.render("vouchers", {dish, highest : dish.highestVoucher, name: dish.name.recordset[0].name, success : 0 });
+  }
+
 });
 
 
@@ -419,6 +438,7 @@ const renewPlan = async (inputNum, amount, payment_method, plan_id) => {
     .input("payment_method", sql.VarChar, payment_method)
     .input("plan_id", sql.Int, plan_id)
     .execute("Initiate_plan_payment");
+  return result.rowsAffected[0]
 };
 
 const cashbackAccount = async (inputNum, payment_id, benefit_id) => {
@@ -439,6 +459,7 @@ const balanceRecharge = async (inputNum, amount, payment_method) => {
     .input("payment_method", sql.VarChar, payment_method)
     .input("amount", sql.Int, amount)
     .execute("Initiate_balance_payment");
+  return result.rowsAffected[0]
   //view should update whenever this is called
 };
 
@@ -449,6 +470,7 @@ const redeemVoucher = async (inputNum, v_id) => {
     .input("mobile_num", sql.Char, inputNum)
     .input("voucher_id", sql.Int, v_id)
     .execute("Redeem_voucher_points");
+  return result.rowsAffected[0]
 };
 
 // admin 1
