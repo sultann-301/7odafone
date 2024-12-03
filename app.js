@@ -48,12 +48,14 @@ var NID = await pool
         .query(
           `SELECT nationalID FROM customer_account WHERE mobileNo =${currMobileNo}`
         );
+
 const {nationalID} = NID.recordset[0];
 dish.name= await pool
 .request()
 .query(
   `SELECT first_name + ' ' + last_name AS name FROM customer_profile WHERE nationalID =${nationalID}`
 );
+dish.balance = await pool.request().query(`SELECT current_balance from Wallet WHERE nationalID =${nationalID}`)
 dish.CashbackWallet = await CashbackWallet(nationalID);
 dish.activeBenefits = await activeBenefits();
 dish.notResolvedTickets = await notResolvedTickets(currMobileNo);
@@ -192,6 +194,7 @@ app.get("/benefits", async(req, res) => {
 
 
 
+
 app.get("/plans", async(req, res) => {
   const service = await allServicePlans();
   const unsub = await unsubscribedPlans(currMobileNo)
@@ -204,15 +207,43 @@ app.get("/plans", async(req, res) => {
   res.render("plans",{service,unsubIDs, name});
 });
 
-app.get("/wallet", async(req, res) => {
+
   
-  res.render("wallet");
+app.get("/wallet", async(req, res) => {
+  const dish = await cookData(currMobileNo)
+
+  console.log(dish.CashbackWallet)
+  res.render("wallet", {dish, success: 2});
 });
+
+
+
+app.post('/wallet', async (req, res) =>{
+  const benefitID = req.body.benefitID
+  const paymentID = req.body.paymentID
+  const dish = await cookData(currMobileNo)
+  const ree = await cashbackAccount(currMobileNo, paymentID, benefitID)
+  if(ree && ree > 0)
+  {
+    res.render("wallet", {dish, cashAcc: ree, success: 1});
+  } else
+  {
+    res.render("wallet", {dish, cashAcc: ree, success: 0});
+  }
+  
+
+
+})
+
+
+
 
 app.get("/recharge", async(req, res) => {
   const dish = await cookData(currMobileNo)
   res.render("recharge", {dish, name: dish.name.recordset[0].name, success : 2});
 });
+
+
 
 app.post("/recharge", async(req, res) => {
   const dish = await cookData(currMobileNo)
@@ -229,22 +260,41 @@ app.post("/recharge", async(req, res) => {
 
 app.get("/renew", async(req, res) => {
   const dish = await cookData(currMobileNo)
-  res.render("renew", {dish, name: dish.name.recordset[0].name, success : 2});
+  res.render("renew", {dish, name: dish.name.recordset[0].name, success : 2, extra: null, rem: null});
 });
 
 app.post("/renew", async(req, res) => {
+  const action = req.body.action;
   const dish = await cookData(currMobileNo)
+
+  if(action == 'renew')
+  {
   const amount = req.body.amount
   const method = req.body.method
   const plan = req.body.plan
   const rows = await renewPlan(currMobileNo, amount, method, plan)
   console.log(rows)
+
   if (rows && rows != 0){
-    res.render("renew", {dish,name: dish.name.recordset[0].name, success : 1 });
+    res.render("renew", {dish,name: dish.name.recordset[0].name, success : 1, rem: null, extra: null});
   }
   else{
-    res.render("renew", {dish, name: dish.name.recordset[0].name, success : 0 });
+    res.render("renew", {dish, name: dish.name.recordset[0].name, success : 0, rem:null, extra:null});
   }
+
+  }
+
+  if (action == 'showDetails')
+  {
+    const planName = req.body.planname;
+    const rem = await remAmount(planName)
+    const extra = await extraAmount(planName)
+    console.log(rem, extra)
+    res.render("renew", {dish, name: dish.name.recordset[0].name, success : 2, rem: rem, extra:extra });
+    
+  }
+
+  
 });
 
 app.get("/vouchers", async(req, res) => {
@@ -365,32 +415,36 @@ async function highestVoucher(mobileNumber) {
   
 }
 
-async function remAmount(paymentID, planID) {
+async function remAmount(planName) {
   try {
     const pool = await sql.connect(config);
 
     const result = await pool
       .request()
-      .input("paymentId", sql.Int, paymentID)
-      .input("planId", sql.Int, planID)
+      .input("plan_name", sql.VarChar, planName)
+      .input("mobile_num", sql.Char, currMobileNo)
       .query(
-        "SELECT dbo.function_remaining_amount(@paymentId, @planId) AS res"
+        "SELECT dbo.Remaining_plan_amount(@mobile_num, @plan_name) AS res"
       );
     return result.recordset[0].res;
+
   } catch (err) {
     console.error("Error querying the view:", err);
   } 
 }
 
-async function extraAmount(paymentID, planID) {
+
+async function extraAmount(planName) {
   try {
     const pool = await sql.connect(config);
 
     const result = await pool
       .request()
-      .input("paymentId", sql.Int, paymentID)
-      .input("planId", sql.Int, planID)
-      .query("SELECT dbo.function_extra_amount(@paymentId, @planId) AS res");
+      .input("plan_name", sql.VarChar, planName)
+      .input("mobile_num", sql.Char, currMobileNo)
+      .query(
+        "SELECT dbo.Extra_plan_amount(@mobile_num, @plan_name) AS res"
+      );
     return result.recordset[0].res;
   } catch (err) {
     console.error("Error querying the view:", err);
@@ -449,6 +503,7 @@ const cashbackAccount = async (inputNum, payment_id, benefit_id) => {
     .input("payment_id", sql.Int, payment_id)
     .input("benefit_id", sql.Int, benefit_id)
     .execute("Payment_wallet_cashback");
+    return result.rowsAffected[0];
 };
 
 const balanceRecharge = async (inputNum, amount, payment_method) => {

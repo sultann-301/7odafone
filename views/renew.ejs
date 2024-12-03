@@ -314,22 +314,34 @@ label{
     </ul>
   </div>
       <div class="benefitsContainer">
-        <form method = 'post'>
+        <form method ='post'>
               <div class="input-container"> 
                 <input class="inputs" placeholder="Amount" type="number" name="amount" id="plann" required>
-                
               </div>
               <div class="input-container"> 
                 <input class="inputs" placeholder="Plan" type="number" name="plan" id="plann" required>                
               </div>
               <label for="Payment Method">Choose a payment method:</label>
-                <select name="method" class="inputs">
+                <select name="method" class="inputs" required>
                     <option value="Cash">Cash</option>
                     <option value="Credit">Credit</option>
                 </select>
-              <button type="submit">Renew Plan</button>
+              <button  name='action'  value = 'renew' type="submit">Renew Plan</button>
+            
+          
+        </form>
+
+        <form method = "post">
+          <label for="name">Plan Name:</label>
+          <input type="text" placeholder="Plan Name" id="number" name="planname" required>
+          <button type="submit"  name="action" value="showDetails">Please press the button to  ok trust me plz bro Show Remaining Amount & Extra Amount</button>
 
         </form>
+        <% if (success == 2 && rem != null && extra != null) { %>
+          <div> Remaining: <%= rem %></div>
+          <div> Extra: <%= extra %></div>
+         
+        <% } %>
         <% if (success < 2) { %>
             <div id="successModal" class="modal">
              <div class="modal-content">
@@ -345,7 +357,7 @@ label{
            <% } %>
       </div>
  
-
+      
       <script>
         const success =  '<%= success || "" %>';
         var span = document.getElementsByClassName("close")[0];

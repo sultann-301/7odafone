@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Wallet</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700;800;900&display=swap');
+        *{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Roboto, sans-serif;
+  }
+  
+  body {
+    height: 100vh;
+    background: #131315;
+    display: grid;
+    grid-template-columns: 20% 80%;
+  }
+  a{
+    text-decoration: none;
+  }
+  .cont{
+   width:200px;
+  }
+  .main{
+    width:100%;
+    height:100%;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    flex-direction: column;
+  }
+  .carousel{
+    display:flex;
+    flex-direction: row;
+    width:100%;
+    height:100%;
+    justify-content: center;
+    align-items: center;
+    margin-left:-6%;
+    margin-top: 5%;
+  }
+  .headers{
+    display:flex;
+    justify-content:end;
+    color:#c7fffb;
+    padding:10px;
+    position:sticky;
+    width:100%;
+    margin-top:20px;
+  }
+  .wel{
+    margin-left:32%;
+    letter-spacing: 2px;
+  }
+  .logo{
+   color:#645e5e;
+   font-weight: bolder;
+   letter-spacing: 2px;
+   margin-left:-2%;
+  }
+
+  .arrow{
+    position:sticky;
+    color:#c7fffb;
+    font-size:40px;
+    margin-top:-40%;
+    cursor: pointer;
+  }
+  .left-arrow{
+    margin-right: 5%;
+  }
+  .right-arrow{
+    margin-left: 5%;
+  }
+  li{
+    color:#c7fffb;
+  }
+  .nav {
+    background: #1d1d1f;
+    padding: 20px 0 10px 10px;
+    border-right: 5px solid #c7fffb;
+    width: 150px;
+    height:100vh;
+    transition: 0.5s;
+    overflow: hidden;
+    position: fixed;
+  }
+  .nav h2{
+    font-size: 15px;
+    color:#c7fffb;
+    margin-bottom:30px;
+    border-bottom:3px solid  #0b3b3f;
+    border-top:3px solid  #0b3b3f;
+    margin-left:0;
+    text-align: center;
+  }
+  .nav .nav-elem {
+    list-style: none;
+    padding: 15px;
+    padding-right: 0;
+    color: #c7fffb;
+    font-size: 15px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    position: relative;
+    transition: 0.5s;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    letter-spacing: 1px;
+    padding-right:10px;
+  }
+  
+  .nav .nav-elem:hover {
+    transition: 0s;
+    background: #2d3138;
+  }
+  
+  .nav .nav-elem.active:before {
+    content: '';
+    position: absolute;
+    top:-20px;
+    right: 0px;
+    width: 20px;
+    height:20px;
+    background: transparent;
+    border-radius: 50%;
+    box-shadow: 10px 10px 0 #c7fffb;
+  }
+  
+  .nav .nav-elem.active:after {
+    content: '';
+    position: absolute;
+    bottom:-20px;
+    right: 0px;
+    width: 20px;
+    height:20px;
+    background: transparent;
+    border-radius: 50%;
+    box-shadow: 10px -10px 0 #c7fffb;
+  }
+  
+  .nav .nav-elem.active {
+    background: #c7fffb;
+    color:#26656a;
+  }
+  
+  .nav:hover {
+    width: 250px;
+  }
+    
+    .title{
+      margin-bottom: 60px;
+      color: #c7fffb;
+    }
+
+
+    .cashbackContainer{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items:stretch;
+        color: white;
+        margin-right: 30%;
+    }
+
+    .cashbackBox
+    {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+        font-size: 20px;
+        border:  3px solid #c7fffb ;
+        text-align: center;
+        border-radius: 25px;
+        padding: 40px;
+    }
+
+    .casbackBox h2{
+        padding-bottom: 10px;
+    }
+
+    .modal {
+        display: block; /* Hidden by default */
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        color: black;
+        overflow: auto;
+        background-color: rgb(0,0,0);
+        background-color: rgba(0,0,0,0.4); /* Black with opacity */
+        padding-top: 60px;
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 400px;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+
+    </style>
+</head>
+<body>
+  <div class="cont">
+    <ul class="nav">
+      <h2 class="wel"><%= dish.name.recordset[0].name %></h2>
+      <a href="/customer" class=" nav-elem">Home</a>
+      <a href="/wallet" class=" nav-elem active">My Wallet</a>
+      <a href="/plans" class=" nav-elem">Offered Plans</a>
+      <a href="/benefits" class=" nav-elem">My Benefits</a>
+      <a href="/shops" class=" nav-elem">Shops</a>
+      <a href="/myplans" class=" nav-elem">Plan Search</a>
+      <a href="/vouchers" class=" nav-elem">My Vouchers</a>
+      <a href="/recharge" class=" nav-elem">Recharge</a>
+      <a href="/renew" class=" nav-elem">Renew</a>    
+    </ul>
+  </div>
+  <div class="cashbackContainer">
+        <h1>YOUR BALANCE: <%= dish.balance.recordset[0].current_balance %> DOLAZ</h1>
+        <h2>YOUR CASHBACKS BOZO</h2>
+        <% for( let i = 0; i < dish.CashbackWallet.length; i++ ) { %>
+                <div class = 'cashbackBox'>
+                    <h2> Cashback ID : <%= dish.CashbackWallet[i].cashbackID %> </h2>
+                    <h4> Amount: <%= dish.CashbackWallet[i].amount %> $</h4>
+                    <p><%= dish.CashbackWallet[i].credit_date.toUTCString().slice(0,16) %></p>
+                  </div>   
+            <% } %>
+
+            <div class="cashbackblabla">
+                <form method="post">
+                    <label for="benefitID">BENEFEET ID</label>
+                    <input type="number"  name="benefitID" id=""required>
+                    <label for="paymentID">pimeent ID</label>
+                    <input type="number" name="paymentID" id="" required>
+                    <button type="submit">RUN M ON w</button>
+                    
+                </form>
+        
+        
+                <% if (success < 2) { %>
+                    <div id="successModal" class="modal">
+                     <div class="modal-content">
+                         <span class="close">&times;</span>
+                         <% if (success == 1) { %>
+                             <p id="errorMessage">Walleted cashbacked!!!!!! succcesfully??</p>
+                         <% } %>
+                         <% if (success == 0) { %>
+                             <p id="errorMessage">It appears an error has taken place</p>
+                         <% } %>  <!-- Display error message -->
+                     </div>
+                 </div>
+                   <% } %>
+              </div>
+         
+      </div>
+
+     
+
+      <script>
+        const success =  '<%= success || "" %>';
+        var span = document.getElementsByClassName("close")[0];
+         
+
+             span.onclick = function() {
+             var modal = document.getElementById("successModal");
+             modal.style.display = "none";
+         }
+      
+         window.onclick = function(event) {
+             var modal = document.getElementById("successModal");
+             if (event.target == modal) {
+                 modal.style.display = "none";
+             }
+         }
+
+         
+ 
+      </script>
+      </div>
+      <script>
+        </script>
+
+
+        
+    
+</body>
+</html>
