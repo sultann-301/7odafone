@@ -163,6 +163,7 @@ app.post("/", async (req, res) => {
   const mobileNo = req.body.mobileNo;
   console.log(password, mobileNo);
 
+
   if (mobileNo == "1" && password == "hamoksha") {
     res.redirect("admin");
   } else {
@@ -221,8 +222,8 @@ app.get("/wallet", async(req, res) => {
 app.post('/wallet', async (req, res) =>{
   const benefitID = req.body.benefitID
   const paymentID = req.body.paymentID
-  const dish = await cookData(currMobileNo)
   const ree = await cashbackAccount(currMobileNo, paymentID, benefitID)
+  const dish = await cookData(currMobileNo)
   if(ree && ree > 0)
   {
     res.render("wallet", {dish, cashAcc: ree, success: 1});
@@ -232,6 +233,7 @@ app.post('/wallet', async (req, res) =>{
   }
   
 
+  
 
 })
 
