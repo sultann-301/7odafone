@@ -207,10 +207,30 @@ button:hover{
     }
 </style>
 <body>
-  <% if (success < 2) { %>
+  <% if (success < 2 || success > 5) { %>
     <div id="successModal" class="modal">
      <div class="modal-content">
          <span class="close">&times;</span>
+         <% if (success == 6) { %>
+          <% if (cashback && cashback > 0) { %>
+            <p id="errorMessage">Cashback returned on this wallet : <%= cashback %></p>
+            <% } else{%>
+            <p id="errorMessage">No cashbacks mann</p>
+          <% } %>
+        <% } %>
+        <% if (success == 7) { %>
+          <% if (transactions && transactions > 0) { %>
+            <p id="errorMessage">Average transaction amount : <%= transactions %></p>
+          <% } else{%>
+            <p id="errorMessage">No transactions mann</p>
+          <% } %>
+        <% } %>
+        <% if (success == 8) { %>
+          <p id="errorMessage">Nothing was updated bro</p>
+        <% } %>
+        <% if (success == 9) { %>
+          <p id="errorMessage">Points updated successfully</p>
+        <% } %>
          <% if (success == 1) { %>
              <p id="errorMessage">Benefits revoked successfully</p>
          <% } %>
@@ -249,6 +269,30 @@ button:hover{
     </form>
     <button onclick = "location.href='/accountAdmin'">RESET</button>
   </nav>
+
+  <nav class="adminBtns">
+    <form method="post">
+      <input placeholder = "Mobile Number" type="number" name="accountSMS" id="" required>
+     <button type="submit" name='action'  value = 'sms'>LIST SMS</button>
+    </form>
+
+    <form method="post">
+      <input placeholder = "Wallet ID" type="number" name="walletCashback" id="" required>
+      <input placeholder = "Plan ID" type="number" name="planCashback" id="" required>
+     <button type="submit" name='action'  value = 'cashback'>GET CASHBACK</button>
+    </form>
+    <form method="post">
+      <input placeholder = "Wallet ID" type="number" name="walletTransactions" id="" required>
+      <input placeholder = "Start Date" type="date" name="startTransactions" id="" required>
+      <input placeholder = "End Date" type="date" name="endTransactions" id="" required>
+     <button type="submit" name='action'  value = 'transactions'>AVERAGE TRANSACTIONS</button>
+    </form>
+    <form method="post">
+      <input placeholder = "Mobile Number" type="number" name="accountPoints" id="" required>
+     <button type="submit" name='action'  value = 'points'>UPDATE POINTS</button>
+    </form>  </nav>
+
+
   <div class="display">
     <div class="output">
         <div class="benefitsContainer">
@@ -261,6 +305,7 @@ button:hover{
                   <p> start_date : <%= dish.accountPlan[i].start_date.toUTCString().slice(0,16) %></p>
                   <p> status : <%= dish.accountPlan[i].status %></p>
                   <p> points : <%= dish.accountPlan[i].points %></p>
+                  <p> Linked to a wallet??? : <%= dish.accountPlan[i].linked %></p>
                 </div>
                 <div>
                   <p style = 'color : #0f840d'> mobileNo : <%= dish.accountPlan[i].mobileNo %></p>
@@ -268,7 +313,7 @@ button:hover{
                   <p> planID : <%= dish.accountPlan[i].planID %></p>
                   <p> nationalID : <%= dish.accountPlan[i].nationalID %> </p>
                   <p> name : <%= dish.accountPlan[i].name %></p>
-                  <p> Linked to a wallet??? : <%= dish.accountPlan[i].linked %></p>  
+                  <p> Payments last year : <%= dish.accountPlan[i].acceptedPayments.payments %></p>
                 </div>
                 <div>
                   <p> price : <%= dish.accountPlan[i].price %></p>
@@ -276,6 +321,7 @@ button:hover{
                   <p> minutes_offered : <%= dish.accountPlan[i].minutes_offered %></p>
                   <p> data_offered : <%= dish.accountPlan[i].data_offered %></p>
                   <p> description : <%= dish.accountPlan[i].description %></p>
+                  <p> Payment points last year : <%= dish.accountPlan[i].acceptedPayments.points %></p>
                 </div>
                 </div>  
             <% } %>
@@ -309,6 +355,23 @@ button:hover{
                   <p style = 'color : #0f840d'> Mobile No : <%= accounts[i].mobileNo %></p>
                   <p> Plan ID : <%= accounts[i].planID %></p>
                   <p> Plan Name : <%= accounts[i].name %></p>
+                </div>
+                </div>  
+            <% } %>
+          <% } %>
+
+          <% if (success == 5) { %>
+            <% if (offers.length == 0) { %>
+              <h2>NOTHING TO SEE HERE MAN</h2>
+            <% } %>
+            <% for( let i = 0; i < offers.length; i++ ) { %>
+              <div class = 'benefitBox'>
+                <div>
+                  <p style = 'color : #0f840d'> offerID : <%= offers[i].offerID %></p>
+                  <p> benefitID : <%= offers[i].benefitID %></p>
+                  <p> Data offered : <%= offers[i].internet_offered %></p>
+                  <p> SMS offerred: <%= offers[i].SMS_offered %></p>
+                  <p> Mins offered: <%= offers[i].minutes_offered %></p>
                 </div>
                 </div>  
             <% } %>

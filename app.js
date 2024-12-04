@@ -182,7 +182,9 @@ app.get("/accountAdmin", async(req, res) => {
   const dish = await cookDataAdmin();
   for (let i = 0; i < dish.accountPlan.length; i++){
     let linked = await walletLinked(dish.accountPlan[i].mobileNo)
+    let accepted = await acceptedPayments(dish.accountPlan[i].mobileNo)
     dish.accountPlan[i].linked = linked
+    dish.accountPlan[i].acceptedPayments = accepted
   }
   res.render("accountAdmin",{dish, usages : [], accounts : [], success : 2});
 });
@@ -218,6 +220,38 @@ app.post("/accountAdmin", async(req, res) => {
     const date = req.body.dateFilter
     const accounts = await accountPlanDate(date, plan)
     res.render("accountAdmin",{dish, usages : [], accounts : accounts, success : 4});
+  }
+
+  if (action == 'sms'){
+    const account = req.body.accountSMS
+    const offers = await accountSmsOffers(account)
+    res.render("accountAdmin",{dish, usages : [], accounts : [], offers : offers, success : 5});
+  }
+
+  if (action == 'cashback'){
+    const plan = req.body.planCashback
+    const wallet = req.body.walletCashback
+    const cashback = await walletCashbackAmount(plan, wallet)
+    res.render("accountAdmin",{dish, usages : [], accounts : [],cashback : cashback, success : 6});
+  }
+
+  if (action == 'transactions'){
+    const wallet = req.body.walletTransactions
+    const start = req.body.startTransactions
+    const end = req.body.endTransactions
+    const transactions = await averageSentTransactions(start, end, wallet)
+    res.render("accountAdmin",{dish, usages : [], accounts : [], transactions: transactions, success : 7});
+  }
+
+  if (action == 'points'){
+    const account = req.body.accountPoints
+    const rows = await updatePoints(account)
+    if (rows && rows > 0){
+      res.render("accountAdmin",{dish, usages : [], accounts : [], success : 9});
+    }
+    else{
+      res.render("accountAdmin",{dish, usages : [], accounts : [], success : 8});
+    }
   }
 
 });
@@ -713,7 +747,7 @@ async function acceptedPayments(number) {
     .request()
     .input("mobile_num", sql.Char, number)
     .execute("Account_Payment_Points");
-  return result.recordset;
+  return result.recordset[0];
 }
 
 async function walletCashbackAmount(planID, walletID) {
@@ -736,7 +770,6 @@ async function averageSentTransactions(startDate, endDate, walletID) {
     .query(
       "SELECT dbo.Wallet_Transfer_Amount(@walletID, @start_date, @end_date) AS average"
     );
-  console.log(result.recordset[0].average);
   return result.recordset[0].average;
 }
 
@@ -746,7 +779,6 @@ async function walletLinked(number) {
     .request()
     .input("mobile_num", sql.Char, number)
     .query("SELECT dbo.Wallet_MobileNo(@mobile_num) AS linked");
-  console.log(result.recordset[0].linked);
   return result.recordset[0].linked;
 }
 
@@ -756,6 +788,7 @@ async function updatePoints(number) {
     .request()
     .input("mobile_num", sql.Char, number)
     .execute("Total_Points_Account");
+  return result.rowsAffected[2]
 }
 
 app.listen(3030);
