@@ -51,17 +51,18 @@
     padding:10px;
     position:sticky;
     width:100%;
-    margin-top:20px;
+    margin-top:5px;
+    margin-left:3%;
   }
   .wel{
     margin-left:32%;
     letter-spacing: 2px;
+    margin-bottom:30%;
   }
   .logo{
    color:#645e5e;
    font-weight: bolder;
    letter-spacing: 2px;
-   margin-left:-2%;
   }
 
   .arrow{
@@ -161,31 +162,133 @@
       color: #c7fffb;
     }
 
+  .coupon {
+  width: 80%;
+  min-height: 200px;
+  border-radius: 10px;
+  overflow: hidden;
+  filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.5));
+  display: flex;
+  align-items: stretch;
+  position: relative;
+  text-transform: uppercase;
+  margin-top:60px;
+  margin-left:80px;
+}
+  .coupon::before,
+  .coupon::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    z-index: -1;
+  }
 
-    .benefitsContainer{
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        align-items:stretch;
-        color: white;
-        margin-right: 30%;
-    }
+  .coupon::before {
+    left: 0;
+    background-image: radial-gradient(
+      circle at 0 50%,
+      transparent 25px,
+      #95c6c2 26px
+    );
+  }
 
-    .benefitBox
-    {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 20px;
-        font-size: 20px;
-        border:  3px solid #c7fffb ;
-        text-align: center;
-        border-radius: 25px;
-        padding: 40px;
-    }
+  .coupon::after {
+    right: 0;
+    background-image: radial-gradient(
+      circle at 100% 50%,
+      transparent 25px,
+      #95c6c2 26px
+    );
+  }
 
-    .benefitBox h2{
-        padding-bottom: 10px;
-    }
+  .coupon > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .left {
+    width: 20%;
+    border-right: 2px dashed rgba(0, 0, 0, 0.13);
+  }
+  .left div {
+    transform: rotate(-90deg);
+    white-space: nowrap;
+    font-weight: bold;
+  }
+
+  .center {
+    flex-grow: 1;
+    text-align: center;
+  }
+
+  .right {
+    width: 120px;
+    background-image: radial-gradient(
+      circle at 100% 50%,
+      transparent 25px,
+      #d7e5e4 26px
+    );
+  }
+  .right div {
+    font-size: 2.5rem;
+    font-weight: 400;
+    transform: rotate(-90deg);
+  }
+
+  .center h2 {
+    background: #000;
+    color:  #d7e5e4;
+    padding: 0 10px;
+    font-size: 2.15rem;
+    white-space: nowrap;
+  }
+
+  .center h3 {
+    font-size: 2.15rem;
+  }
+  .center small {
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+  }
+  .benefits{
+    width:80%;
+    height:100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Maintain spacing between children */
+    overflow-y: auto; 
+    padding: 0px 30px;
+    margin-left: 0%;
+  }
+  .descrip{
+    color:#c7fffb;
+    background-color: transparent;
+    border-bottom:3px solid  #0b3b3f;
+    border-top:3px solid  #0b3b3f;
+    width:300px;
+    padding:5px;
+    text-align: center;
+    letter-spacing: 1px;
+    padding-left:20px;
+    font-style: italic;
+    font-size: 20px;
+    height:50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left:-10%;
+  }
+  .space{
+  width:10px;
+}
+.border{
+  border:2px solid #444c4b;
+  padding:5px;
+}
 
     </style>
 </head>
@@ -204,25 +307,31 @@
       <a href="/renew" class=" nav-elem">Renew</a>    
     </ul>
   </div>
-      <div class="benefitsContainer">
+  <div class="benefits">
+    <div class="headers">
+      <div class="logo">7ODAFONE</div>
+    </div>
+    <div class="descrip">Your  <div class="space"></div> Benefits</div>
         <% for( let i = 0; i < benefit.length; i++ ) { %>
             <% if (benefit[i].mobileNo==currMobileNo) { %>
-                <div class = 'benefitBox'>
-                    <h2> ID : <%= benefit[i].benefitID %> </h2>
-                    <h4> <%= benefit[i].description %></h4>
-                    <p><%= benefit[i].validity_date %></p>
-                  </div>
-
-                  
+              <div class="coupon">
+              <div class="left">
+                <div class="border">Enjoy Your Benefit</div>
+              </div>
+              <div class="center">
+                <div>
+                  <h2> <%= benefit[i].description %></h2>
+                  <small>Valid until <%= benefit[i].validity_date.toUTCString().slice(0,16) %></small>
+                </div>
+              </div>
+              <div class="right">
+                <div> ID : <%= benefit[i].benefitID %> </div>
+              </div>
+            </div>  
             <% } %>
-          
         <% } %>
       </div>
       <script>
-        </script>
-
-
-        
-    
+        </script> 
 </body>
 </html>

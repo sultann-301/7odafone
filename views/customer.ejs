@@ -29,11 +29,15 @@
   }
   .main{
     width:100%;
-    height:100%;
+    height:3*100vh;
     display: flex;
     justify-content: center;
     align-items:center;
     flex-direction: column;
+  }
+  section{
+    height:100vh;
+    width:100%;
   }
   .carousel{
     display:flex;
@@ -43,7 +47,7 @@
     justify-content: center;
     align-items: center;
     margin-left:-6%;
-    margin-top: 5%;
+    margin-top: -5%;
   }
   .headers{
     display:flex;
@@ -52,11 +56,12 @@
     padding:10px;
     position:sticky;
     width:100%;
-    margin-top:20px;
+    height:50px;
   }
   .wel{
     margin-left:32%;
     letter-spacing: 2px;
+    margin-bottom:30%;
   }
   .logo{
    color:#645e5e;
@@ -69,7 +74,7 @@
     position:sticky;
     color:#c7fffb;
     font-size:40px;
-    margin-top:-40%;
+    margin-top:5%;
     cursor: pointer;
   }
   .left-arrow{
@@ -367,10 +372,9 @@ z-index: -2;
 }
 .descrip{
   margin-top: 4%;
-  margin-bottom: 0;
-  color:#c7fffb;
   margin-left:-12%;
-  margin-bottom:80px;
+  color:#c7fffb;
+  margin-bottom:15%;
   background-color: transparent;
   border-bottom:3px solid  #0b3b3f;
   border-top:3px solid  #0b3b3f;
@@ -382,6 +386,9 @@ z-index: -2;
   font-style: italic;
   font-size: 20px;
   height:50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .plansContainer{
       display: flex;
@@ -417,6 +424,81 @@ z-index: -2;
     text-align: center;
     padding: 20px;
   }
+  .main2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-right:10px;
+  }
+  .boxx {
+  width: 90%;
+  border-bottom: 20px solid #c7fffb;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.boxx h2 {
+  color: #0b3b3f;
+  background:#a6d3d0;
+  padding: 10px 20px;
+  font-size: 20px;
+  font-weight: 700;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.boxx ul {
+  position: relative;
+  background: #1d1d1f;
+}
+.boxx ul:hover li {
+  opacity: 0.2;
+}
+.boxx ul li {
+  list-style: none;
+  padding: 10px;
+  width: 100%;
+  background:#222525;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+  transition: transform 0.5s;
+  color:#f6f9f9;;
+  border: 2px solid  #c7fffb; 
+}
+.boxx ul li:hover {
+  transform: scale(1.1);
+  z-index: 5;
+  background: #45858a;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  opacity: 1;
+  border: 2px solid #c7fffb ;
+  border-radius: 2rem;
+}
+.boxx ul li span {
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  background: #24656b;
+  color: #fff;
+  display: inline-block;
+  border-radius: 50%;
+  margin-right: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  transform: translateY(-2px);
+}
+.boxx ul li:hover span {
+  background: #fff;
+  color: #0b3b3f;
+}
+.boxx ul li h4 {
+  margin-top: 5px;
+  margin-left: 15px;
+  margin-bottom: 5px;
+}
+.boxx ul li h2 {
+ font-style: italic;
+}
     </style>
 </head>
 <body>
@@ -435,8 +517,9 @@ z-index: -2;
 
     </ul>
   </div>
-  <section>
   <div class="main">
+  <section>
+  <div class="main2">
   <div class="headers">
     <div class="logo">7ODAFONE</div>
   </div>
@@ -449,9 +532,10 @@ z-index: -2;
   </div>
   <div class="right-arrow arrow" onclick="shift('right')">></div>
  </div>
-</div>
-<h2 id = 'fivemonths'>
-Service plans YOU subscribed to in the last 5 months
+ </div>
+</section>
+<section>
+<h2 class="descrip" id = 'fivemonths'> Your Subscribed Plans in the Last 5 Months
 </h2>
 <% for( let i = 0; i < dish.servicePlans5Months.length; i++ ) { %>
   <div class = 'plansBox'>
@@ -463,24 +547,24 @@ Service plans YOU subscribed to in the last 5 months
         <p><%= dish.servicePlans5Months[i].description %></p>
     </div>
 <% } %>
-<h2 id = 'fivemonths'>
-  YOUR top 10 successful payments
-</h2>
-<% for( let i = 0; i < dish.topSuccPayments.length; i++ ) { %>
-  <div class = 'plansBox'>
-        <h2>#<%= dish.topSuccPayments[i].paymentID %></h2>
-        <h4> Amount: <%= dish.topSuccPayments[i].amount %>$</h4>
-        <h4> Date: <%= dish.topSuccPayments[i].date_of_payment %></h4>
-        <h4> Payment Method: <%= dish.topSuccPayments[i].payment_method %> </h4>
-    </div>
-<% } %>
-<footer class = "tickets">
-  <div>
-    Number of unresolved tickets: <%= dish.notResolvedTickets[''] %>
-  </div> 
-</footer>
 </section>
-
+<section>
+  <div class="boxx">
+    <h2>Your Top 10 Successful Payments</h2>
+    <ul>
+<% for( let i = 0; i < dish.topSuccPayments.length; i++ ) { %>
+        <li><span>#<%=i+1 %></span>
+          <h2>Payment ID: <%= dish.topSuccPayments[i].paymentID %></h2>
+          <h4> Amount: <%= dish.topSuccPayments[i].amount %>$</h4>
+          <h4> Date: <%= dish.topSuccPayments[i].date_of_payment.toUTCString().slice(0,16) %></h4>
+          <h4> Payment Method: <%= dish.topSuccPayments[i].payment_method %> </h4>
+        </li>
+<% } %>
+</ul>
+</div>
+    <div>Number of unresolved tickets: <%= dish.notResolvedTickets[''] %>
+  </div> 
+</section>
   <script>
     let items = document.querySelectorAll('li');
     items.forEach(item => {

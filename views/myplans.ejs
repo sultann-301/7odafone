@@ -29,11 +29,16 @@
   }
   .main{
     width:100%;
-    height:100%;
+    height:100vh;
     display: flex;
     justify-content: center;
     align-items:center;
     flex-direction: column;
+    padding:15px;
+  }
+  section{
+    height:100vh;
+    width:100%;
   }
   .carousel{
     display:flex;
@@ -43,20 +48,20 @@
     justify-content: center;
     align-items: center;
     margin-left:-6%;
-    margin-top: 5%;
+    margin-top:-5%;
   }
   .headers{
     display:flex;
     justify-content:end;
     color:#c7fffb;
-    padding:10px;
     position:sticky;
     width:100%;
-    margin-top:20px;
+    height:50px;
   }
   .wel{
     margin-left:32%;
     letter-spacing: 2px;
+    margin-bottom:30%;
   }
   .logo{
    color:#645e5e;
@@ -69,7 +74,7 @@
     position:sticky;
     color:#c7fffb;
     font-size:40px;
-    margin-top:-40%;
+    margin-top:5%;
     cursor: pointer;
   }
   .left-arrow{
@@ -184,7 +189,7 @@
 }
 .container {
   width: 100%;
-  height:450px;
+  max-height: 50%;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -291,6 +296,7 @@
   animation-delay: 2.5s;
 }
 
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -353,6 +359,26 @@ z-index: -2;
   font-weight: 300;
   font-size: 1.5rem;
 }
+.descrip{
+  margin-top: 4%;
+  margin-left:-12%;
+  color:#c7fffb;
+  margin-bottom:15%;
+  background-color: transparent;
+  border-bottom:3px solid  #0b3b3f;
+  border-top:3px solid  #0b3b3f;
+  width:450px;
+  padding:5px;
+  text-align: center;
+  letter-spacing: 1px;
+  padding-left:20px;
+  font-style: italic;
+  font-size: 20px;
+  height:50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .input-container{
   display:flex;
   flex-direction: row;
@@ -410,10 +436,10 @@ form{
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width:90%;
+  width:100%;
   gap:20px;
   margin-left:-6%;
-  margin-bottom: 7%;
+  margin-bottom: 6%;
 }
   .space{
     width:25px;
@@ -421,7 +447,10 @@ form{
 label{
   color:#c7fffb;
   width:100px;
-  margin-left: 5px;
+  margin-left: 10px;
+  margin-right: -13px;
+  font-weight: bold;
+  font-style: italic;
 }
 input[type="date"]::-webkit-calendar-picker-indicator {
       background-color: white; /* Change the background color */
