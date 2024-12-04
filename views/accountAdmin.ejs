@@ -74,74 +74,270 @@ button:hover{
 }
 .output
 {
-  background-color: red;
-  width:1000px;
+  width:1800px;
   height:1000px;
   display: flex;
   flex-direction: row;
-   
 }
 
-.col1
-{ 
-  height:100%;
-  width: 100%;
-  background-color: cyan;
-
-}
-.col2
-{ 
-  height:100%;
-  width: 100%;
-  background-color: magenta;
-
-}
-
+.nav .nav-elem {
+    list-style: none;
+    padding: 15px;
+    padding-right: 0;
+    color: #c7fffb;
+    font-size: 15px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    position: relative;
+    transition: 0.5s;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    letter-spacing: 1px;
+    padding-right:10px;
+  }
+  
+  .nav .nav-elem:hover {
+    transition: 0s;
+    background: #2d3138;
+  }
+  
+  .nav .nav-elem.active:before {
+    content: '';
+    position: absolute;
+    top:-20px;
+    right: 0px;
+    width: 20px;
+    height:20px;
+    background: transparent;
+    border-radius: 50%;
+    box-shadow: 10px 10px 0 #c7fffb;
+  }
+  
+  .nav .nav-elem.active:after {
+    content: '';
+    position: absolute;
+    bottom:-20px;
+    right: 0px;
+    width: 20px;
+    height:20px;
+    background: transparent;
+    border-radius: 50%;
+    box-shadow: 10px -10px 0 #c7fffb;
+  }
+  
+  .nav .nav-elem.active {
+    background: #c7fffb;
+    color:#26656a;
+  }
 .hodafone
 {
   margin-left: 90%;
   color:#c7fffb;
 }
+.benefitsContainer{
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        align-items:stretch;
+        color: white;
+        margin-left: 10%;
+        margin-right: 10%;
+        margin-top: 2%;
+        margin-bottom: 2%;
+    }
+
+    .benefitBox
+    {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 30px;
+        font-size: 20px;
+        justify-content: space-around;
+        border:  3px solid #c7fffb ;
+        text-align: center;
+        border-radius: 25px;
+        padding: 20px;
+    }
+    p{
+      font-size : 24px
+    }
+
+    .benefitBox h2{
+        padding-bottom: 10px;
+    }
+    .modal {
+        display: block; /* Hidden by default */
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        color: black;
+        overflow: auto;
+        background-color: rgb(0,0,0);
+        background-color: rgba(0,0,0,0.4); /* Black with opacity */
+        padding-top: 60px;
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 400px;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
 </style>
 <body>
+  <% if (success < 2) { %>
+    <div id="successModal" class="modal">
+     <div class="modal-content">
+         <span class="close">&times;</span>
+         <% if (success == 1) { %>
+             <p id="errorMessage">Benefits revoked successfully</p>
+         <% } %>
+         <% if (success == 0) { %>
+             <p id="errorMessage">It appears an error has taken place</p>
+         <% } %>  <!-- Display error message -->
+     </div>
+ </div>
+   <% } %>
   <h2 class="hodafone">7odafone</h2>
   <nav>
-    <a href="/shopAdmin">Shops</a>
-    <a href="/accountAdmin">Accounts</a>
-    <a href="/profileAdmin">Profiles</a>
-    <a href="/walletAdmin">Wallets</a>
-    <a href="/paymentAdmin">Payments</a>
-    <a href="/ticketAdmin">Tickets</a>
+    <a href="/eshops" class=" nav-elem">E-Shops</a>
+    <a href="/pshops" class=" nav-elem">Physical Stores</a>
+    <a href="/accountAdmin" class=" nav-elem active">Accounts</a>
+    <a href="/profileAdmin" class=" nav-elem">Profiles</a>
+    <a href="/walletAdmin" class=" nav-elem">Wallets</a>
+    <a href="/paymentAdmin" class=" nav-elem">Payments</a>
+    <a href="/ticketAdmin" class=" nav-elem">Tickets</a>
   </nav>
   <nav class="adminBtns">
     <form method="post">
-      <input type="text" name="" id="">
-      <input type="text" name="" id="">
-     <button type="submit">FILTER BY</button>
+      <input placeholder = "Plan ID" type ="number" name="planFilter" id="" required>
+      <input placeholder = "Date" type="date" name="dateFilter" id="" required>
+     <button type="submit" name='action'  value = 'filter'>FILTER BY</button>
     </form>
 
     <form method="post">
-      <input type="text" name="" id="">
-      <input type="text" name="" id="">
-     <button type="submit">TOTAL USAGE</button>
+      <input placeholder = "Mobile Number" type="number" name="accountUsage" id="" required>
+      <input placeholder = "Date" type="date" name="dateUsage" id="" required>
+     <button type="submit" name='action'  value = 'usage'>TOTAL USAGE</button>
     </form>
     <form method="post">
-      <input type="text" name="" id="">
-      <input type="text" name="" id="">
-     <button type="submit">REVOKE BENEFIT</button>
+      <input placeholder = "Mobile Number" type ="number" name="accountRevoke" id="" required>
+      <input placeholder = "Plan ID" type="number" name="planRevoke" id="" required>
+     <button type="submit" name='action'  value = 'revoke'>REVOKE BENEFIT</button>
     </form>
-    <form method="post">
-      <button type="submit">RESET</button>
-    </form>
+    <button onclick = "location.href='/accountAdmin'">RESET</button>
   </nav>
   <div class="display">
     <div class="output">
-      <div class="col1"></div>
-      <div class="col2"></div>
+        <div class="benefitsContainer">
+          <% if (success == 2) { %>
+            <% for( let i = 0; i < dish.accountPlan.length; i++ ) { %>
+              <div class = 'benefitBox'>
+                <div>
+                  <p> balance : <%= dish.accountPlan[i].balance %></p>
+                  <p> account_type : <%= dish.accountPlan[i].account_type %></p>
+                  <p> start_date : <%= dish.accountPlan[i].start_date.toUTCString().slice(0,16) %></p>
+                  <p> status : <%= dish.accountPlan[i].status %></p>
+                  <p> points : <%= dish.accountPlan[i].points %></p>
+                </div>
+                <div>
+                  <p style = 'color : #0f840d'> mobileNo : <%= dish.accountPlan[i].mobileNo %></p>
+                  <p style = 'color : #d61717d5'> password : <%= dish.accountPlan[i].pass %></p>
+                  <p> planID : <%= dish.accountPlan[i].planID %></p>
+                  <p> nationalID : <%= dish.accountPlan[i].nationalID %> </p>
+                  <p> name : <%= dish.accountPlan[i].name %></p>
+                  <p> Linked to a wallet??? : <%= dish.accountPlan[i].linked %></p>  
+                </div>
+                <div>
+                  <p> price : <%= dish.accountPlan[i].price %></p>
+                  <p> SMS_offered : <%= dish.accountPlan[i].SMS_offered %></p>
+                  <p> minutes_offered : <%= dish.accountPlan[i].minutes_offered %></p>
+                  <p> data_offered : <%= dish.accountPlan[i].data_offered %></p>
+                  <p> description : <%= dish.accountPlan[i].description %></p>
+                </div>
+                </div>  
+            <% } %>
+          <% } %>
+
+
+          <% if (success == 3) { %>
+            <% if (usages.length == 0) { %>
+              <h2>NOTHING TO SEE HERE MAN</h2>
+            <% } %>
+            <% for( let i = 0; i < usages.length; i++ ) { %>
+              <div class = 'benefitBox'>
+                <div>
+                  <p style = 'color : #0f840d'> planID : <%= usages[i].planID %></p>
+                  <p> Total SMS : <%= usages[i]['total SMS'] %></p>
+                  <p> Total Data : <%= usages[i]['total data'] %></p>
+                  <p> Total Mins : <%= usages[i]['total mins'] %></p>
+                </div>
+                </div>  
+            <% } %>
+          <% } %>
+
+
+          <% if (success == 4) { %>
+            <% if (accounts.length == 0) { %>
+              <h2>NOTHING TO SEE HERE MAN</h2>
+            <% } %>
+            <% for( let i = 0; i < accounts.length; i++ ) { %>
+              <div class = 'benefitBox'>
+                <div>
+                  <p style = 'color : #0f840d'> Mobile No : <%= accounts[i].mobileNo %></p>
+                  <p> Plan ID : <%= accounts[i].planID %></p>
+                  <p> Plan Name : <%= accounts[i].name %></p>
+                </div>
+                </div>  
+            <% } %>
+          <% } %>
+          
+        </div>
+      </div>
     </div>
 
   </div>
   
+  <script>
+    const success =  '<%= success || "" %>';
+    var span = document.getElementsByClassName("close")[0];
+     
+
+         span.onclick = function() {
+         var modal = document.getElementById("successModal");
+         modal.style.display = "none";
+     }
   
+     window.onclick = function(event) {
+         var modal = document.getElementById("successModal");
+         if (event.target == modal) {
+             modal.style.display = "none";
+         }
+     }
+     
+
+  </script>
 </body>
 </html>

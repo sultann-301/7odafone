@@ -81,6 +81,7 @@ const cookDataAdmin = async () => {
   dish.eShopVouchers = await eShopVouchers();
   dish.accountPayments = await accountPayments();
   dish.numCashback = await numCashback();
+  console.log(dish)
   return dish;
 }
 
@@ -145,9 +146,80 @@ app.post("/myplans", async(req, res) => {
   res.render("myplans",{dish, name, usages});
 });
 
+app.get("/profileAdmin", async(req, res) => {
+  const dish = await cookDataAdmin();
+  res.render("profileAdmin",{dish});
+});
+
+app.get("/pshops", async(req, res) => {
+  const dish = await cookDataAdmin();
+  res.render("pshops",{dish});
+});
+
+app.get("/eshops", async(req, res) => {
+  const dish = await cookDataAdmin();
+  res.render("eshops",{dish});
+});
+
+app.get("/paymentAdmin", async(req, res) => {
+  const dish = await cookDataAdmin();
+  res.render("paymentAdmin",{dish});
+});
+
+app.get("/ticketAdmin", async(req, res) => {
+  const dish = await cookDataAdmin();
+  res.render("ticketAdmin",{dish});
+});
+
+app.get("/walletAdmin", async(req, res) => {
+  const dish = await cookDataAdmin();
+  console.log(dish.numCashback.length)
+  console.log(dish.customerWallet.length)
+  res.render("walletAdmin",{dish});
+});
+
 app.get("/accountAdmin", async(req, res) => {
   const dish = await cookDataAdmin();
-  res.render("accountAdmin",{dish});
+  for (let i = 0; i < dish.accountPlan.length; i++){
+    let linked = await walletLinked(dish.accountPlan[i].mobileNo)
+    dish.accountPlan[i].linked = linked
+  }
+  res.render("accountAdmin",{dish, usages : [], accounts : [], success : 2});
+});
+
+app.post("/accountAdmin", async(req, res) => {
+  const action = req.body.action;
+  const dish = await cookDataAdmin()
+  for (let i = 0; i < dish.accountPlan.length; i++){
+    let linked = await walletLinked(dish.accountPlan[i].mobileNo)
+    dish.accountPlan[i].linked = linked
+  }
+  if (action == 'revoke'){
+    const plan = req.body.planRevoke
+    const account = req.body.accountRevoke
+    const rows = await benefitsAccounts(account, plan)
+    if (rows && rows != 0){
+      res.render("accountAdmin",{dish, usages : [], accounts : [], success : 1});
+    }
+    else{
+      res.render("accountAdmin",{dish,usages : [], accounts : [], success : 0});
+    }    
+  }
+
+  if (action == 'usage'){
+    const date = req.body.dateUsage
+    const account = req.body.accountUsage
+    const usages = await accountUsagePlan(account, date)
+    res.render("accountAdmin",{dish, usages : usages, accounts : [], success : 3});
+  }
+
+  if (action == 'filter'){
+    const plan = req.body.planFilter
+    const date = req.body.dateFilter
+    const accounts = await accountPlanDate(date, plan)
+    res.render("accountAdmin",{dish, usages : [], accounts : accounts, success : 4});
+  }
+
 });
 
 app.get("/shops", async(req, res) => {
@@ -574,6 +646,7 @@ async function accountPlanDate(subDate, planId) {
     .input("sub_date", sql.Date, subDate)
     .input("plan_id", sql.Int, planId)
     .query("SELECT * FROM dbo.Account_Plan_Date(@sub_date,@plan_id)");
+  console.log(result.recordset)
   return result.recordset;
 }
 
@@ -587,7 +660,6 @@ async function accountUsagePlan(mobileNum, startDate) {
     .query("SELECT * FROM dbo.Account_Usage_Plan(@mobile_num,@start_date)");
   return result.recordset;
 }
-
 //1-8
 async function benefitsAccounts(mobileNum, planID) {
   const pool = await sql.connect(config);
@@ -596,7 +668,7 @@ async function benefitsAccounts(mobileNum, planID) {
     .input("mobile_num", sql.Char, mobileNum)
     .input("plan_id", sql.Int, planID)
     .execute("Benefits_Account");
-  return result.recordset;
+  return result.rowsAffected[0];
 }
 
 //1-9

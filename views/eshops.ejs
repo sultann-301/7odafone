@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Page</title>
+</head>
+<style>
+  body{
+    margin: 0;
+    background: #131315;
+  }
+nav{
+  display: flex;
+  width: 100vw;
+  justify-content: space-between;
+  background-color: black;
+}
+
+nav a 
+{
+  font-size: 45px;
+  padding: 10px;
+  background-color: black;
+  border: 3px solid #c7fffb;
+  border-radius: 3px;
+  color:#c7fffb;
+  text-decoration: none
+
+
+}
+.adminBtns
+{
+  display: flex;
+  width: 100vw;
+  position: sticky;
+  justify-content: space-between;
+  top: 0;
+  background-color: black;
+  margin-top: 10px;
+}
+
+button{
+  margin: 6px;
+  width: 300px;
+  height: 30px;
+  border-radius: 1rem;
+  border:none;
+  background-color: #50f8f3;
+  color: #100e0e;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover{
+  background-color: #232020;
+  color: #50f8f3;
+  border: 2px solid #50f8f3;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.adminBtns form
+{
+  display: grid;
+  grid-template-columns: 2;
+  
+}
+
+.display
+{
+  display: flex;
+  justify-content: center;
+}
+.output
+{
+  width:1800px;
+  height:1000px;
+  display: flex;
+  flex-direction: row;
+}
+
+
+.hodafone
+{
+  margin-left: 90%;
+  color:#c7fffb;
+}
+.benefitsContainer{
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        align-items:stretch;
+        color: white;
+        margin-left: 10%;
+        margin-right: 10%;
+        margin-top: 2%;
+        margin-bottom: 2%;
+    }
+
+    .benefitBox
+    {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 30px;
+        font-size: 20px;
+        justify-content: space-around;
+        border:  3px solid #c7fffb ;
+        text-align: center;
+        border-radius: 25px;
+        padding: 20px;
+    }
+    p{
+      font-size : 24px
+    }
+
+    .benefitBox h2{
+        padding-bottom: 10px;
+    }
+</style>
+<body>
+  <h2 class="hodafone">7odafone</h2>
+  <nav>
+    <a href="/eshops" class=" nav-elem active">E-Shops</a>
+    <a href="/pshops" class=" nav-elem">Physical Stores</a>
+    <a href="/accountAdmin" class=" nav-elem">Accounts</a>
+    <a href="/profileAdmin" class=" nav-elem">Profiles</a>
+    <a href="/walletAdmin" class=" nav-elem">Wallets</a>
+    <a href="/paymentAdmin" class=" nav-elem">Payments</a>
+    <a href="/ticketAdmin" class=" nav-elem">Tickets</a>
+  </nav>
+  <div class="display">
+    <div class="output">
+        <div class="benefitsContainer">
+          <% for( let i = 0; i < dish.eShopVouchers.length; i++ ) { %>
+                  <div class = 'benefitBox'>
+                    <div>
+                      <p style = 'color : #0f840d'> voucherID : <%= dish.eShopVouchers[i].voucherID %></p>
+                      <p> URL : <%= dish.eShopVouchers[i].URL %></p>
+                      <p> rating : <%= dish.eShopVouchers[i].rating %> </p>
+                      <p> shopID : <%= dish.eShopVouchers[i].shopID %></p>
+                      <p> value : <%= dish.eShopVouchers[i].value %></p>  
+                    </div>
+                    </div>  
+          <% } %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  
+  
+</body>
+</html>
