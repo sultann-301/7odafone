@@ -6,29 +6,35 @@
   <title>Admin Page</title>
 </head>
 <style>
+  @import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
+ @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700;800;900&display=swap');
+
   body{
     margin: 0;
+    font-family:'Roboto';
     background: #131315;
   }
-nav{
+  nav{
   display: flex;
   width: 100vw;
   justify-content: space-between;
-  background-color: black;
+  background-color: #131315;
+  border: 0.1px solid cyan;
 }
 
-nav a 
+
+section
 {
-  font-size: 45px;
-  padding: 10px;
-  background-color: black;
-  border: 3px solid #c7fffb;
-  border-radius: 3px;
-  color:#c7fffb;
-  text-decoration: none
-
-
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
+.hodafone
+{
+  color:#c7fffb;
+}
+
+
 .adminBtns
 {
   display: flex;
@@ -66,6 +72,31 @@ button:hover{
   grid-template-columns: 2;
   
 }
+.nav-elem
+{
+  font-size: 30px;
+  padding: 10px;
+  background-color: black;
+  border: 3px solid #c7fffb;
+  border-radius: 3px;
+  color:#c7fffb;
+  text-decoration: none;
+}
+
+.nav-elem:hover
+{
+  color: black;
+  background-color: #c7fffb;
+  transition: 0.2s ease-in;
+
+}
+
+ .active
+{
+  color: black;
+  background-color: #c7fffb;
+}
+
 
 .display
 {
@@ -83,7 +114,6 @@ button:hover{
 
 .hodafone
 {
-  margin-left: 90%;
   color:#c7fffb;
 }
 .benefitsContainer{
@@ -119,7 +149,11 @@ button:hover{
     }
 </style>
 <body>
-  <h2 class="hodafone">7odafone</h2>
+  <section>
+    <a href="/" class="hodafone">LOG OUT</a>
+    <h2 class="hodafone">7odafone</h2>
+ </section>
+ 
   <nav>
     <a href="/eshops" class=" nav-elem active">E-Shops</a>
     <a href="/pshops" class=" nav-elem">Physical Stores</a>

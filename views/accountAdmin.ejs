@@ -14,11 +14,12 @@
     font-family:'Roboto';
     background: #131315;
   }
+
 nav{
   display: flex;
   width: 100vw;
   justify-content: space-between;
-  background-color: black;
+  background-color: #131315;
   border: 0.1px solid cyan;
 }
 
@@ -30,14 +31,22 @@ nav{
   border: 3px solid #c7fffb;
   border-radius: 3px;
   color:#c7fffb;
-  text-decoration: none
+  text-decoration: none;
 }
+
 
 .nav-elem:hover
 {
-  color: #c7fffb;
-  background-color: black;
+  color: black;
+  background-color: #c7fffb;
+  transition: 0.2s ease-in;
 
+}
+
+ .active
+{
+  color: black;
+  background-color: #c7fffb;
 }
 
 .adminBtns
@@ -45,15 +54,15 @@ nav{
   display: flex;
   width: 100vw;
   justify-content: space-between;
-  background-color: black;
+  background-color: #131315;
   margin-top: 10px;
 }
+
 
 .adminBtns input
 {
   border-radius: 10px;
   padding: 5px;
- 
 }
 
 
@@ -94,6 +103,20 @@ button:hover{
   display: flex;
   justify-content: center;
 }
+
+section
+{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  
+}
+
+.hodafone
+{
+  color:#c7fffb;
+}
 .output
 {
   width:1080px;
@@ -112,11 +135,7 @@ button:hover{
 
 
 
-.hodafone
-{
-  margin-left: 90%;
-  color:#c7fffb;
-}
+
 .benefitsContainer{
         display: flex;
         width: 100%;
@@ -237,7 +256,11 @@ button:hover{
      </div>
  </div>
    <% } %>
-  <h2 class="hodafone">7odafone</h2>
+   <section>
+     <a href="/" class="hodafone">LOG OUT</a>
+     <h2 class="hodafone">7odafone</h2>
+  </section>
+  
   <nav>
     <a href="/eshops" class="nav-elem">E-Shops</a>
     <a href="/pshops" class="nav-elem">Physical Stores</a>
@@ -306,7 +329,6 @@ button:hover{
                 </div>
                 <div>
                   <p style = 'color : #0f840d'> mobileNo : <%= dish.accountPlan[i].mobileNo %></p>
-                  <p style = 'color : #d61717d5'> password : <%= dish.accountPlan[i].pass %></p>
                   <p> planID : <%= dish.accountPlan[i].planID %></p>
                   <p> nationalID : <%= dish.accountPlan[i].nationalID %> </p>
                   <p> name : <%= dish.accountPlan[i].name %></p>
