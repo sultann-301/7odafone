@@ -63,7 +63,6 @@ dish.highestVoucher = await highestVoucher(currMobileNo);
 dish.topSuccPayments = await topSuccPayments(currMobileNo);
 dish.getShops = await getShops();
 dish.servicePlans5Months = await servicePlans5Months(currMobileNo);
-console.log(dish)
 return dish;
 }
 
@@ -81,7 +80,6 @@ const cookDataAdmin = async () => {
   dish.eShopVouchers = await eShopVouchers();
   dish.accountPayments = await accountPayments();
   dish.numCashback = await numCashback();
-  console.log(dish)
   return dish;
 }
 
@@ -173,8 +171,6 @@ app.get("/ticketAdmin", async(req, res) => {
 
 app.get("/walletAdmin", async(req, res) => {
   const dish = await cookDataAdmin();
-  console.log(dish.numCashback.length)
-  console.log(dish.customerWallet.length)
   res.render("walletAdmin",{dish});
 });
 
@@ -267,8 +263,6 @@ app.post("/", async (req, res) => {
   const pool = await sql.connect(config);
   const password = req.body.password;
   const mobileNo = req.body.mobileNo;
-  console.log(password, mobileNo);
-
 
   if (mobileNo == "1" && password == "hamoksha") {
     res.redirect("accountAdmin");
@@ -318,33 +312,33 @@ app.get("/plans", async(req, res) => {
   
 app.get("/wallet", async(req, res) => {
   const dish = await cookData(currMobileNo)
-
-  console.log(dish.balance.recordset[0].current_balance)
   res.render("wallet", {dish, success: 2});
 });
 
 
 
 app.post('/wallet', async (req, res) =>{
-  const dish = await cookData(currMobileNo)
+  let dish = await cookData(currMobileNo)
   try{
     const benefitID = req.body.benefitID
-  const paymentID = req.body.paymentID
-  const ree = await cashbackAccount(currMobileNo, paymentID, benefitID)
-  if(ree && ree > 0)
-  {
-    res.render("wallet", {dish, cashAcc: ree, success: 1});
-  } else
-  {
-    res.render("wallet", {dish, cashAcc: ree, success: 0});
-  }
-  }
-  catch (err){
-    res.render("wallet", {dish, cashAcc: 0, success: 0});
-  }
+    const paymentID = req.body.paymentID
+    const ree = await cashbackAccount(currMobileNo, paymentID, benefitID)
+    console.log(ree)
+    dish = await cookData(currMobileNo)
+    console.log(ree)
+    if(ree && ree > 0)
+    {
+      res.render("wallet", {dish, cashAcc: ree, success: 1});
+    } else
+    {
+      res.render("wallet", {dish, cashAcc: ree, success: 0});
+    }
+    }
+    catch (err){
+      console.log(err)
+      res.render("wallet", {dish, cashAcc: 0, success: 0});
+    }
 })
-
-
 
 
 
@@ -383,7 +377,6 @@ app.post("/renew", async(req, res) => {
   const method = req.body.method
   const plan = req.body.plan
   const rows = await renewPlan(currMobileNo, amount, method, plan)
-  console.log(rows)
 
   if (rows && rows != 0){
     res.render("renew", {dish,name: dish.name.recordset[0].name, success : 1, rem: null, extra: null});
@@ -399,7 +392,6 @@ app.post("/renew", async(req, res) => {
     const planName = req.body.planname;
     const rem = await remAmount(planName)
     const extra = await extraAmount(planName)
-    console.log(rem, extra)
     res.render("renew", {dish, name: dish.name.recordset[0].name, success : 2, rem: rem, extra:extra });
     
   }
@@ -680,7 +672,6 @@ async function accountPlanDate(subDate, planId) {
     .input("sub_date", sql.Date, subDate)
     .input("plan_id", sql.Int, planId)
     .query("SELECT * FROM dbo.Account_Plan_Date(@sub_date,@plan_id)");
-  console.log(result.recordset)
   return result.recordset;
 }
 
