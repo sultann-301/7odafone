@@ -645,6 +645,7 @@ body
     -ms-transition: all 0.3s ease-in-out 0s;
     -o-transition: all 0.3s ease-in-out 0s;
     transition: all 0.3s ease-in-out 0s;
+    min-width:313px;
 }
 
 .pricing-column-wrapper {
@@ -859,7 +860,7 @@ body
   flex-direction: row;
   gap:50px;
   justify-content: center;
-  padding-top:5%;
+  padding-top:10%;
 }
   </style>
 </head>
@@ -909,7 +910,7 @@ body
                              <figure class="pricing-row">SMS: <%= service[i].SMS_offered %>n</figure>
                              <figure class="pricing-row">Minutes: <%= service[i].minutes_offered %></figure>
                              <figure class="pricing-row ">Data: <%= service[i].data_offered %> GB</figure>
-                             <figure class="pricing-row"></figure><%= service[i].description %></figure>
+                             <figure class="pricing-row"><%= service[i].description %></figure>
                              <div class="pricing-footer">
                              </div>
                            </div>
@@ -934,7 +935,7 @@ body
                                <figure class="pricing-row">SMS: <%= service[i].SMS_offered %>n</figure>
                                <figure class="pricing-row">Minutes: <%= service[i].minutes_offered %></figure>
                                <figure class="pricing-row ">Data: <%= service[i].data_offered %> GB</figure>
-                               <figure class="pricing-row"></figure><%= service[i].description %></figure>
+                               <figure class="pricing-row"><%= service[i].description %></figure>
                                <div class="pricing-footer">
                                </div>
                              </div>
