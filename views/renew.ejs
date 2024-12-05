@@ -320,8 +320,7 @@ label{
       <a href="/shops" class=" nav-elem">Shops</a>
       <a href="/myplans" class=" nav-elem">Plan Search</a>
       <a href="/vouchers" class=" nav-elem">My Vouchers</a>
-      <a href="/recharge" class=" nav-elem">Recharge</a>
-      <a href="/renew" class=" nav-elem">Renew</a>
+      <a href="/renew" class=" nav-elem active">Transactions</a>
     </ul>
   </div>
       <div class="benefitsContainer">
@@ -348,6 +347,32 @@ label{
           <button type="submit"  name="action" value="showDetails">Please press the button to  ok trust me plz bro Show Remaining Amount & Extra Amount</button>
 
         </form>
+
+        <form method = 'post'>
+          <div class="input-container"> 
+              <input class="inputs" placeholder="Amount" type="number" name="amount" id="plann" required>
+            </div>
+            <label for="Payment Method">Choose a payment method:</label>
+              <select name="method" class="inputs">
+                  <option value="Cash">Cash</option>
+                  <option value="Credit">Credit</option>
+              </select>
+            <button type="submit" name="action" value="recharge">Recharge Balance</button>
+
+      </form>
+      <% if (success > 2) { %>
+        <div id="successModal" class="modal">
+         <div class="modal-content">
+             <span class="close">&times;</span>
+             <% if (success == 4) { %>
+                 <p id="errorMessage">Balance recharged succcesfully</p>
+             <% } %>
+             <% if (success == 3) { %>
+                 <p id="errorMessage">It appears an error has taken place</p>
+             <% } %>  <!-- Display error message -->
+         </div>
+     </div>
+       <% } %>
         <% if (success == 2 && rem != null && extra != null) { %>
           <div> Remaining: <%= rem %></div>
           <div> Extra: <%= extra %></div>

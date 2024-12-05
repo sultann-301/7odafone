@@ -55,7 +55,7 @@ dish.name= await pool
 .query(
   `SELECT first_name + ' ' + last_name AS name FROM customer_profile WHERE nationalID =${nationalID}`
 );
-dish.balance = await pool.request().query(`SELECT current_balance from Wallet WHERE nationalID =${nationalID}`)
+dish.balance = await pool.request().query(`SELECT current_balance, last_modified_date from Wallet WHERE nationalID =${nationalID}`)
 dish.CashbackWallet = await CashbackWallet(nationalID);
 dish.activeBenefits = await activeBenefits();
 dish.notResolvedTickets = await notResolvedTickets(currMobileNo);
@@ -342,26 +342,6 @@ app.post('/wallet', async (req, res) =>{
 
 
 
-app.get("/recharge", async(req, res) => {
-  const dish = await cookData(currMobileNo)
-  res.render("recharge", {dish, name: dish.name.recordset[0].name, success : 2});
-});
-
-
-
-app.post("/recharge", async(req, res) => {
-  const dish = await cookData(currMobileNo)
-  const amount = req.body.amount
-  const method = req.body.method
-  const rows = await balanceRecharge(currMobileNo, amount, method)
-  if (rows && rows != 0){
-    res.render("recharge", {dish,name: dish.name.recordset[0].name, success : 1 });
-  }
-  else{
-    res.render("recharge", {dish, name: dish.name.recordset[0].name, success : 0 });
-  }
-});
-
 app.get("/renew", async(req, res) => {
   const dish = await cookData(currMobileNo)
   res.render("renew", {dish, name: dish.name.recordset[0].name, success : 2, extra: null, rem: null});
@@ -371,6 +351,20 @@ app.post("/renew", async(req, res) => {
   const action = req.body.action;
   const dish = await cookData(currMobileNo)
 
+  if(action == 'recharge'){
+    const amount = req.body.amount
+  const method = req.body.method
+  try{
+    await balanceRecharge(currMobileNo, amount, method)
+
+    res.render("renew", {dish,name: dish.name.recordset[0].name, success : 4 });
+  }
+  
+  catch (err) {
+    res.render("renew", {dish, name: dish.name.recordset[0].name, success : 3 });
+  }
+  
+  }
   if(action == 'renew')
   {
   const amount = req.body.amount

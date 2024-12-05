@@ -461,6 +461,17 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     }
     </style>
 </head>
+<script>
+
+  // Stop the form resubmission on page refresh
+  
+  if ( window.history.replaceState ) {
+  
+  window.history.replaceState( null, null, window.location.href );
+  
+  }
+  
+</script>
 <body>
   <div class="cont">
     <ul class="nav">
@@ -472,8 +483,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
       <a href="/shops" class=" nav-elem">Shops</a>
       <a href="/myplans" class=" nav-elem active">Plan Search</a>
       <a href="/vouchers" class=" nav-elem">My Vouchers</a>
-      <a href="/recharge" class=" nav-elem">Recharge</a>
-      <a href="/renew" class=" nav-elem">Renew</a>
+      <a href="/renew" class=" nav-elem active">Transactions</a>
     </ul>
   </div>
   <div class="main">
