@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Page</title>
+</head>
+<style>
+  @import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
+ @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700;800;900&display=swap');
+
+  body{
+    margin: 0;
+    font-family:'Roboto';
+    background: #131315;
+  }
+nav{
+  display: flex;
+  width: 100vw;
+  justify-content: space-between;
+  background-color: black;
+  border: 0.1px solid cyan;
+}
+
+.nav-elem
+{
+  font-size: 30px;
+  padding: 10px;
+  background-color: black;
+  border: 3px solid #c7fffb;
+  border-radius: 3px;
+  color:#c7fffb;
+  text-decoration: none
+}
+
+.nav-elem:hover
+{
+  color: #c7fffb;
+  background-color: black;
+
+}
+
+.adminBtns
+{
+  display: flex;
+  width: 100vw;
+  justify-content: space-between;
+  background-color: black;
+  margin-top: 10px;
+}
+
+.adminBtns input
+{
+  border-radius: 10px;
+  padding: 5px;
+ 
+}
+
+
+button{
+  width: 300px;
+  height: 30px;
+  border-radius: 1rem;
+  border:none;
+  background-color: #50f8f3;
+  color: #100e0e;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover{
+  background-color: #232020;
+  color: #50f8f3;
+  border: 2px solid #50f8f3;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.adminBtns form
+{
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+ 
+  justify-content: center;
+  align-items: stretch;
+
+}
+
+
+.display
+{
+  display: flex;
+  justify-content: center;
+}
+.output
+{
+  width:1080px;
+  height:1000px;
+  display: flex;
+  flex-direction: row;
+}
+
+.adminBtns
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items:center;
+}
+
+
+
+.hodafone
+{
+  margin-left: 90%;
+  color:#c7fffb;
+}
+.benefitsContainer{
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        align-items:stretch;
+        color: white;
+        margin-left: 10%;
+        margin-right: 10%;
+        margin-top: 2%;
+        margin-bottom: 2%;
+        
+    }
+
+    .benefitBox
+    {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 30px;
+        font-size: 20px;
+        justify-content: space-around;
+        border:  3px solid #c7fffb ;
+        text-align: center;
+        border-radius: 25px;
+        padding: 20px;
+    }
+
+   
+    
+
+
+    p{
+      font-size : 24px
+    }
+
+    .benefitBox h2{
+        padding-bottom: 10px;
+    }
+    .modal {
+        display: block; /* Hidden by default */
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        color: black;
+        overflow: auto;
+        background-color: rgb(0,0,0);
+        background-color: rgba(0,0,0,0.4); /* Black with opacity */
+        padding-top: 60px;
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 400px;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+</style>
+<script>
+
+  // Stop the form resubmission on page refresh
+  
+  if ( window.history.replaceState ) {
+  
+  window.history.replaceState( null, null, window.location.href );
+  
+  }
+  
+</script>
+<body>
+  <% if (success < 2 || success > 5) { %>
+    <div id="successModal" class="modal">
+     <div class="modal-content">
+         <span class="close">&times;</span>
+         <% if (success == 6) { %>
+          <% if (cashback && cashback > 0) { %>
+            <p id="errorMessage">Cashback returned on this wallet : <%= cashback %></p>
+            <% } else{%>
+            <p id="errorMessage">No cashbacks mann</p>
+          <% } %>
+        <% } %>
+        <% if (success == 7) { %>
+          <% if (transactions && transactions > 0) { %>
+            <p id="errorMessage">Average transaction amount : <%= transactions %></p>
+          <% } else{%>
+            <p id="errorMessage">No transactions mann</p>
+          <% } %>
+        <% } %>
+        <% if (success == 8) { %>
+          <p id="errorMessage">Nothing was updated bro</p>
+        <% } %>
+        <% if (success == 9) { %>
+          <p id="errorMessage">Points updated successfully</p>
+        <% } %>
+         <% if (success == 1) { %>
+             <p id="errorMessage">Benefits revoked successfully</p>
+         <% } %>
+         <% if (success == 0) { %>
+             <p id="errorMessage">It appears an error has taken place</p>
+         <% } %>  <!-- Display error message -->
+     </div>
+ </div>
+   <% } %>
+  <h2 class="hodafone">7odafone</h2>
+  <nav>
+    <a href="/eshops" class="nav-elem">E-Shops</a>
+    <a href="/pshops" class="nav-elem">Physical Stores</a>
+    <a href="/accountAdmin" class="nav-elem active">Accounts</a>
+    <a href="/profileAdmin" class="nav-elem">Profiles</a>
+    <a href="/walletAdmin" class="nav-elem">Wallets</a>
+    <a href="/paymentAdmin" class="nav-elem">Payments</a>
+    <a href="/ticketAdmin" class="nav-elem">Tickets</a>
+  </nav>
+  <nav class="adminBtns">
+    <form method="post">
+      <input placeholder = "Plan ID" type ="number" name="planFilter" id="" required>
+      <input placeholder = "Date" type="date" name="dateFilter" id="" required>
+     <button type="submit" name='action'  value = 'filter'>FILTER BY</button>
+    </form>
+
+    <form method="post">
+      <input placeholder = "Mobile Number" type="number" name="accountUsage" id="" required>
+      <input placeholder = "Date" type="date" name="dateUsage" id="" required>
+     <button type="submit" name='action'  value = 'usage'>TOTAL USAGE</button>
+    </form>
+    <form method="post">
+      <input placeholder = "Mobile Number" type ="number" name="accountRevoke" id="" required>
+      <input placeholder = "Plan ID" type="number" name="planRevoke" id="" required>
+     <button type="submit" name='action'  value = 'revoke'>REVOKE BENEFIT</button>
+    </form>
+    <button onclick = "location.href='/accountAdmin'">RESET</button>
+  </nav>
+
+  <nav class="adminBtns">
+    <form method="post">
+      <input placeholder = "Mobile Number" type="number" name="accountSMS" id="" required>
+     <button type="submit" name='action'  value = 'sms'>LIST SMS</button>
+    </form>
+
+    <form method="post">
+      <input placeholder = "Wallet ID" type="number" name="walletCashback" id="" required>
+      <input placeholder = "Plan ID" type="number" name="planCashback" id="" required>
+     <button type="submit" name='action'  value = 'cashback'>GET CASHBACK</button>
+    </form>
+    <form method="post">
+      <input placeholder = "Wallet ID" type="number" name="walletTransactions" id="" required>
+      <input placeholder = "Start Date" type="date" name="startTransactions" id="" required>
+      <input placeholder = "End Date" type="date" name="endTransactions" id="" required>
+     <button type="submit" name='action'  value = 'transactions'>AVERAGE TRANSACTIONS</button>
+    </form>
+    <form method="post">
+      <input placeholder = "Mobile Number" type="number" name="accountPoints" id="" required>
+     <button type="submit" name='action'  value = 'points'>UPDATE POINTS</button>
+    </form>  </nav>
+
+
+  <div class="display">
+    <div class="output">
+        <div class="benefitsContainer">
+          <% if (success == 2) { %>
+            <% for( let i = 0; i < dish.accountPlan.length; i++ ) { %>
+              <div class = 'benefitBox'>
+                <div>
+                  <p> balance : <%= dish.accountPlan[i].balance %></p>
+                  <p> account_type : <%= dish.accountPlan[i].account_type %></p>
+                  <p> start_date : <%= dish.accountPlan[i].start_date.toUTCString().slice(0,16) %></p>
+                  <p> status : <%= dish.accountPlan[i].status %></p>
+                  <p> points : <%= dish.accountPlan[i].points %></p>
+                  <p> Linked to a wallet??? : <%= dish.accountPlan[i].linked %></p>
+                </div>
+                <div>
+                  <p style = 'color : #0f840d'> mobileNo : <%= dish.accountPlan[i].mobileNo %></p>
+                  <p style = 'color : #d61717d5'> password : <%= dish.accountPlan[i].pass %></p>
+                  <p> planID : <%= dish.accountPlan[i].planID %></p>
+                  <p> nationalID : <%= dish.accountPlan[i].nationalID %> </p>
+                  <p> name : <%= dish.accountPlan[i].name %></p>
+                  <p> Payments last year : <%= dish.accountPlan[i].acceptedPayments.payments %></p>
+                </div>
+                <div>
+                  <p> price : <%= dish.accountPlan[i].price %></p>
+                  <p> SMS_offered : <%= dish.accountPlan[i].SMS_offered %></p>
+                  <p> minutes_offered : <%= dish.accountPlan[i].minutes_offered %></p>
+                  <p> data_offered : <%= dish.accountPlan[i].data_offered %></p>
+                  <p> description : <%= dish.accountPlan[i].description %></p>
+                  <p> Payment points last year : <%= dish.accountPlan[i].acceptedPayments.points %></p>
+                </div>
+                </div>  
+            <% } %>
+          <% } %>
+
+
+          <% if (success == 3) { %>
+            <% if (usages.length == 0) { %>
+              <h2>NOTHING TO SEE HERE MAN</h2>
+            <% } %>
+            <% for( let i = 0; i < usages.length; i++ ) { %>
+              <div class = 'benefitBox'>
+                <div>
+                  <p style = 'color : #0f840d'> planID : <%= usages[i].planID %></p>
+                  <p> Total SMS : <%= usages[i]['total SMS'] %></p>
+                  <p> Total Data : <%= usages[i]['total data'] %></p>
+                  <p> Total Mins : <%= usages[i]['total mins'] %></p>
+                </div>
+                </div>  
+            <% } %>
+          <% } %>
+
+
+          <% if (success == 4) { %>
+            <% if (accounts.length == 0) { %>
+              <h2>NOTHING TO SEE HERE MAN</h2>
+            <% } %>
+            <% for( let i = 0; i < accounts.length; i++ ) { %>
+              <div class = 'benefitBox'>
+                <div>
+                  <p style = 'color : #0f840d'> Mobile No : <%= accounts[i].mobileNo %></p>
+                  <p> Plan ID : <%= accounts[i].planID %></p>
+                  <p> Plan Name : <%= accounts[i].name %></p>
+                </div>
+                </div>  
+            <% } %>
+          <% } %>
+
+          <% if (success == 5) { %>
+            <% if (offers.length == 0) { %>
+              <h2>NOTHING TO SEE HERE MAN</h2>
+            <% } %>
+            <% for( let i = 0; i < offers.length; i++ ) { %>
+              <div class = 'benefitBox'>
+                <div>
+                  <p style = 'color : #0f840d'> offerID : <%= offers[i].offerID %></p>
+                  <p> benefitID : <%= offers[i].benefitID %></p>
+                  <p> Data offered : <%= offers[i].internet_offered %></p>
+                  <p> SMS offerred: <%= offers[i].SMS_offered %></p>
+                  <p> Mins offered: <%= offers[i].minutes_offered %></p>
+                </div>
+                </div>  
+            <% } %>
+          <% } %>
+          
+        </div>
+      </div>
+    </div>
+
+  </div>
+  
+  <script>
+    const success =  '<%= success || "" %>';
+    var span = document.getElementsByClassName("close")[0];
+     
+
+         span.onclick = function() {
+         var modal = document.getElementById("successModal");
+         modal.style.display = "none";
+     }
+  
+     window.onclick = function(event) {
+         var modal = document.getElementById("successModal");
+         if (event.target == modal) {
+             modal.style.display = "none";
+         }
+     }
+     
+
+  </script>
+</body>
+</html>
