@@ -232,24 +232,30 @@
     position: absolute;
     top:40%;
     left:47%;
+    font-weight: bold;
     color:white;
+    letter-spacing: 1px;
     font: 26px;
     max-width:280px;
   }
   .name{
     position: absolute;
+    color: #ddeedf;
     top:93%;
+    font-weight: bold;
     left:47%;
-    color:white;
+    letter-spacing: 1px;
     font: 26px;
     max-width:280px;
   }
   .date{
     position: absolute;
     top:93%;
-    left:100%;
+    font-weight: bold;
+    left:97%;
     color:white;
     font: 26px;
+    width : 112px
   }
   .space{
     width:10px;
@@ -278,8 +284,7 @@
       <a href="/shops" class=" nav-elem">Shops</a>
       <a href="/myplans" class=" nav-elem">Plan Search</a>
       <a href="/vouchers" class=" nav-elem">My Vouchers</a>
-      <a href="/recharge" class=" nav-elem">Recharge</a>
-      <a href="/renew" class=" nav-elem">Renew</a>    
+      <a href="/renew" class=" nav-elem active">Transactions</a>
     </ul>
   </div>
   <div class="cashbackContainer">
@@ -291,7 +296,7 @@
       <div class="descrip">Your  <div class="space"></div> Wallet</div>
       <div class="balance">Current Balance: <%= dish.balance.recordset[0].current_balance %>$</div>
       <div class="name"><%= dish.name.recordset[0].name %></div>
-      <div class="date">2/12/2023</div>
+      <div class="date"> <%= dish.balance.recordset[0].last_modified_date.toUTCString().slice(4,16) %></div>
         <svg version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 600 368">
           <defs>
             <mask id="chipMask">
@@ -412,7 +417,7 @@
   .set('svg', {opacity:1})
   .set('.scratches', {rotation:70, x:450, y:-10})
   .set('#tri2', {scale:0.5})
-  .from('#cardMask rect', {scale:0, rotation:-20, duration:2, transformOrigin:'50% 50%', ease:'expo.inOut'}, 0)
+  .from('#cardMask rect', {scale:0, rotation:-20, duration:0.8, transformOrigin:'50% 50%', ease:'expo.inOut'}, 0)
   .to('#tri1', {motionPath: {
       path: "#midC",
       align: "#midC",
@@ -447,7 +452,7 @@ starShine = gsap.timeline()
   .to('.date', {opacity:1}, 0)
   .fromTo('#star', {rotate:-20},{rotate:120, duration:0.8, ease:'none'}, 0)
 
-window.onclick =()=> tl.play(0);
+
         const success =  '<%= success || "" %>';
         var span = document.getElementsByClassName("close")[0];
          
