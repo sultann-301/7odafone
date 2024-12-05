@@ -29,15 +29,15 @@
   }
   .main{
     width:100%;
-    height:3*100vh;
-    display: flex;
+    height:4*100vh;
+    display: grid;
     justify-content: center;
     align-items:center;
-    flex-direction: column;
+    grid-template-rows: 100vh 200vh 100vh;
   }
   section{
     height:100vh;
-    width:100%;
+    width:80vw;
   }
   .carousel{
     display:flex;
@@ -67,7 +67,7 @@
    color:#645e5e;
    font-weight: bolder;
    letter-spacing: 2px;
-   margin-left:-2%;
+   margin-left:0%;
   }
 
   .arrow{
@@ -293,7 +293,7 @@
   stroke-dashoffset: calc(440 - (440 * var(--num)) / 100);
   opacity: 0;
   animation: fadeIn 1s linear forwards;
-  animation-delay: 2.5s;
+  animation-delay: 1.5s;
 }
 
 .tickets{
@@ -321,7 +321,7 @@
   position: absolute;
   inset: 5px;
   z-index: 10;
-  animation: animateDot 2s linear forwards;
+  animation: animateDot 1.5s linear forwards;
 }
 
 @keyframes animateDot {
@@ -356,7 +356,7 @@ z-index: -2;
   inset: 0;
   opacity: 0;
   animation: fadeIn 1s linear forwards;
-  animation-delay: 2.5s;
+  animation-delay: 2s;
   margin-top:25px;
   margin-left:5px;
 }
@@ -439,7 +439,7 @@ z-index: -2;
 }
 .boxx h2 {
   color: #0b3b3f;
-  background:#a6d3d0;
+  background:#c7fffb;
   padding: 10px 20px;
   font-size: 20px;
   font-weight: 700;
@@ -499,6 +499,17 @@ z-index: -2;
 .boxx ul li h2 {
  font-style: italic;
 }
+#fivemonths{
+margin-top:-35%;
+width:500px;
+color:#c7fffb
+}
+.h{
+margin-bottom:50px;
+margin-top:-35%;
+}
+
+
     </style>
 </head>
 <body>
@@ -518,7 +529,7 @@ z-index: -2;
     </ul>
   </div>
   <div class="main">
-  <section>
+  <section id="usage">
   <div class="main2">
   <div class="headers">
     <div class="logo">7ODAFONE</div>
@@ -534,7 +545,7 @@ z-index: -2;
  </div>
  </div>
 </section>
-<section>
+<section id="five">
 <h2 class="descrip" id = 'fivemonths'> Your Subscribed Plans in the Last 5 Months
 </h2>
 <% for( let i = 0; i < dish.servicePlans5Months.length; i++ ) { %>
@@ -548,9 +559,10 @@ z-index: -2;
     </div>
 <% } %>
 </section>
-<section>
+<section id="pay">
+  <h2 class="descrip h">Your Top 10 Successful Payments</h2>
   <div class="boxx">
-    <h2>Your Top 10 Successful Payments</h2>
+    <h2>Payments</h2>
     <ul>
 <% for( let i = 0; i < dish.topSuccPayments.length; i++ ) { %>
         <li><span>#<%=i+1 %></span>
