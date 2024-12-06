@@ -96,6 +96,12 @@ app.get("/customer", async (req, res) => {
     for (let j = 0; j < dish.allServicePlans.length; j++){
       let plan = dish.allServicePlans[j] 
       if (plan.name == usages[i].name){
+        usages[i].data = usages[i].data_consumption
+        usages[i].mins = usages[i].minutes_used
+        usages[i].sms = usages[i].SMS_sent
+        usages[i].dataPlan = plan.data_offered
+        usages[i].minsPlan = plan.minutes_offered
+        usages[i].smsPlan = plan.SMS_offered
         usages[i].data_consumption = Math.round((usages[i].data_consumption/plan.data_offered) * 100)
         usages[i].SMS_sent = Math.round((usages[i].SMS_sent/plan.SMS_offered) * 100)
         usages[i].minutes_used = Math.round((usages[i].minutes_used/plan.minutes_offered) * 100)
@@ -399,9 +405,10 @@ app.get("/vouchers", async(req, res) => {
 });
 
 app.post("/vouchers", async(req, res) => {
-  var voucher = req.body.voucher
+  var voucher = req.body.action
+  console.log(voucher)
   const dish = await cookData(currMobileNo)
-  var rows = await redeemVoucher(currMobileNo, voucher)
+  var rows = await redeemVoucher(currMobileNo, parseInt(voucher))
   if (rows && rows != 0){
     res.render("vouchers", {dish, highest : dish.highestVoucher, name: dish.name.recordset[0].name, success : 1 });
   }

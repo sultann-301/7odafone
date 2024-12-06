@@ -390,6 +390,17 @@ button:hover{
 
     </style>
 </head>
+<script>
+
+  // Stop the form resubmission on page refresh
+  
+  if ( window.history.replaceState ) {
+  
+  window.history.replaceState( null, null, window.location.href );
+  
+  }
+  
+</script>
 <body>
   <div class="cont">
     <ul class="nav">
@@ -520,14 +531,14 @@ button:hover{
               <h3 class="headers">Get Cashback Here</h3>
                 <form method="post">
                   <div class="input-container">
-                    <label for="benefitID">Cashback ID</label>
+                    <label for="benefitID">Benefit ID</label>
                     <input class="inputs" type="number"  name="benefitID" id=""required>
                   </div>
                   <div class="input-container">
                     <label for="paymentID">Payment ID</label>
                     <input class="inputs" type="number" name="paymentID" id="" required>
                   </div>
-                    <button type="submit">RUN M ON w</button>
+                    <button type="submit">Redeem Cashback</button>
                 </form>
       
 
