@@ -340,7 +340,11 @@ section
                   <p> minutes_offered : <%= dish.accountPlan[i].minutes_offered %></p>
                   <p> data_offered : <%= dish.accountPlan[i].data_offered %></p>
                   <p> description : <%= dish.accountPlan[i].description %></p>
-                  <p> Payment points last year : <%= dish.accountPlan[i].acceptedPayments.points %></p>
+                  <% if (dish.accountPlan[i].acceptedPayments.points) { %>
+                    <p> Payment points last year : <%= dish.accountPlan[i].acceptedPayments.points %></p>
+                  <% } else{ %>
+                     <p> Payment points last year : 0</p>
+                  <%}%>
                 </div>
                 </div>  
             <% } %>
