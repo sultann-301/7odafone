@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Cabin|Indie+Flower|Inknut+Antiqua|Lora|Ravi+Prakash" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"  />
     <title>Vouchers</title>
     <style>
         @import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
@@ -17,6 +19,7 @@
   body {
     height: 100vh;
     background: #131315;
+    background-image:url("https://1.bp.blogspot.com/-Fo3iRt97ZXY/XvSG4EMwi0I/AAAAAAAAVEo/mrApRTcVVRk1m-fX9K-ffNwRUXlHUocdwCLcBGAsYHQ/s1600/h.jpg");
     display: grid;
     grid-template-columns: 20% 80%;
   }
@@ -24,8 +27,17 @@
     text-decoration: none;
   }
   .cont{
-   width:200px;
-  }
+    width:100%;
+   display: flex;
+   flex-direction: column;
+    }
+    .vouchs{
+      width:80%;
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap:40px;
+    margin-bottom:20px;
+    }
   .main{
     width:100%;
     height:100%;
@@ -33,49 +45,6 @@
     justify-content: center;
     align-items:center;
     flex-direction: column;
-  }
-  .carousel{
-    display:flex;
-    flex-direction: row;
-    width:100%;
-    height:100%;
-    justify-content: center;
-    align-items: center;
-    margin-left:-6%;
-    margin-top: 5%;
-  }
-  .headers{
-    display:flex;
-    justify-content:end;
-    color:#c7fffb;
-    padding:10px;
-    position:sticky;
-    width:100%;
-    margin-top:20px;
-  }
-  .wel{
-    margin-left:32%;
-    letter-spacing: 2px;
-  }
-  .logo{
-   color:#645e5e;
-   font-weight: bolder;
-   letter-spacing: 2px;
-   margin-left:-2%;
-  }
-
-  .arrow{
-    position:sticky;
-    color:#c7fffb;
-    font-size:40px;
-    margin-top:-40%;
-    cursor: pointer;
-  }
-  .left-arrow{
-    margin-right: 5%;
-  }
-  .right-arrow{
-    margin-left: 5%;
   }
   li{
     color:#c7fffb;
@@ -168,7 +137,6 @@
         justify-content: space-evenly;
         align-items:stretch;
         color: white;
-        margin-right: 30%;
     }
 
     .benefitBox
@@ -233,25 +201,6 @@ input {
   background-color: transparent;
 }
 
-button{
-  width: 100px;
-  height: 30px;
-  border-radius: 1rem;
-  border:none;
-  background-color: #50f8f3;
-  color: #100e0e;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-button:hover{
-  background-color: #232020;
-  color: #50f8f3;
-  border: 2px solid #50f8f3;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.5s;
-}
 form{
   display:flex;
   flex-direction: row;
@@ -308,19 +257,141 @@ label{
         cursor: pointer;
     }
 
+/* CSS */
+.button-89 {
+  --b: 3px;   /* border thickness */
+  --s: .45em; /* size of the corner */
+  --color:#2d8a84;
+  
+  padding: calc(.5em + var(--s)) calc(.9em + var(--s));
+  color: var(--color);
+  --_p: var(--s);
+  background:
+    conic-gradient(from 90deg at var(--b) var(--b),#0000 90deg,var(--color) 0)
+    var(--_p) var(--_p)/calc(100% - var(--b) - 2*var(--_p)) calc(100% - var(--b) - 2*var(--_p));
+  transition: .3s linear, color 0s, background-color 0s;
+  outline: var(--b) solid #0000;
+  outline-offset: .6em;
+  font-size: 16px;
+
+  border: 0;
+
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-89:hover,
+.button-89:focus-visible{
+  --_p: 0px;
+  outline-color: var(--color);
+  outline-offset: .05em;
+}
+
+.button-89:active {
+  background: var(--color);
+  color: #fff;
+}
+div.container {
+  max-width: 1350px;
+  overflow: hidden
+}
+.upcomming {
+  font-size: 45px;
+  text-transform: uppercase;
+  border-left: 14px solid #26656a;
+  padding-left: 12px;
+  margin: 18px 8px;
+}
+.container .item {
+  width: 100%;
+  float: left;
+  padding: 0 20px;
+  background: #fff;
+  overflow: hidden;
+  margin: 10px;
+  height:100%;
+}
+.container .item-right, .container .item-left {
+  float: left;
+  padding: 20px 
+}
+.container .item-right {
+  padding: 79px 50px;
+  margin-right: 20px;
+  width: 25%;
+  position: relative;
+  height: 150px;
+}
+.container .item-right .up-border, .container .item-right .down-border {
+    padding: 14px 15px;
+    background-color: #ddd;
+    border-radius: 50%;
+    position: absolute
+}
+.container .item-right .up-border {
+  top: -8px;
+  right: -35px;
+}
+.container .item-right .down-border {
+  bottom: -13px;
+  right: -35px;
+}
+.container .item-right .num {
+  font-size: 60px;
+  text-align: center;
+  color: #111
+}
+.container .item-right .day, .container .item-left .event {
+  color: #555;
+  font-size: 20px;
+  margin-bottom: 9px;
+}
+.container .item-right .day {
+  text-align: center;
+  font-size: 25px;
+}
+.container .item-left {
+  width: 71%;
+  padding: 34px 0px 19px 46px;
+  border-left: 3px dotted #999;
+} 
+.container .item-left .title {
+  color: #111;
+  font-size: 34px;
+  margin-bottom: 12px
+}
+.container .item-left .sce {
+  margin-top: 5px;
+  display: block
+}
+.container .item-left .sce .icon, .container .item-left .sce p,
+.container .item-left .loc .icon, .container .item-left .loc p{
+    float: left;
+    word-spacing: 5px;
+    letter-spacing: 1px;
+    color: #888;
+    margin-bottom: 10px;
+}
+.container .item-left .sce .icon, .container .item-left .loc .icon {
+  margin-right: 10px;
+  font-size: 20px;
+  color: #666
+}
+.container .item-left .loc {display: block}
+.fix {clear: both}
+.container .item .tickets, .booked, .cancel{
+    color: #fff;
+    padding: 6px 14px;
+    float: right;
+    margin-top: 10px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer
+}
+
     </style>
 </head>
-<script>
-
-  // Stop the form resubmission on page refresh
-  
-  if ( window.history.replaceState ) {
-  
-  window.history.replaceState( null, null, window.location.href );
-  
-  }
-  
-</script>
 <body>
   <div class="cont">
     <ul class="nav">
@@ -336,32 +407,78 @@ label{
 
     </ul>
   </div>
+  
+  
       <div class="benefitsContainer">
+        <div class="container">
+          <h1 class="upcomming">Your Vouchers</h1>
+          <div class="vouchs">
         <% for( let i = 0; i < dish.vouchers.length; i++ ) { %>
             <% if (dish.vouchers[i].voucherID == dish.highestVoucher) { %>
-                <div class = 'benefitBoxHIGH'>
-                    <h2> uhh, i think this is the HIGHEST v man </h2>
-                    <h2> ID : <%= dish.vouchers[i].voucherID %> </h2>
-                    <h4> Value: <%= dish.vouchers[i].value %></h4>
-                    <h4> Points: <%= dish.vouchers[i].points %></h4>
-                    <p> Expiry Date: <%= dish.vouchers[i].expiry_date.toUTCString().slice(0,16) %></p>
-                </div> 
+              <div class="item">
+                <div class="item-right">
+                  <p class="day">ID</p>
+                  <h2 class="num"><%= dish.vouchers[i].voucherID %></h2>
+                  <span class="up-border"></span>
+                  <span class="down-border"></span>
+                </div> <!-- end item-right -->
+                
+                <div class="item-left">
+                  <p class="event" style="border-top:2px solid #26656a;border-bottom:2px solid #26656a; color:#26656a;">Highest Voucher</p>
+                  <h2 class="title">Value: <%= dish.vouchers[i].value %></h2>
+                  
+                  <div class="sce">
+                    <div class="icon">
+                      <i class="fa fa-table"></i>
+                    </div>
+                    <p>Expiry Date: <%= dish.vouchers[i].expiry_date.toUTCString().slice(0,16) %></p>
+                  </div>
+                  <div class="fix"></div>
+                  <div class="loc">
+                    <div class="icon">
+                      <i class="fa fa-map-marker"></i>
+                    </div>
+                  </div>
+                  <div class="fix"></div>
+                  <button class="button-89" role="button">Redeem</button>
+                </div> <!-- end item-right -->
+              </div>
                 <% } %>
             <%  if (dish.vouchers[i].voucherID != dish.highestVoucher) { %>
-                <div class = 'benefitBox'>
-                    <h2> ID : <%= dish.vouchers[i].voucherID %> </h2>
-                    <h4> Value: <%= dish.vouchers[i].value %></h4>
-                    <h4> Points: <%= dish.vouchers[i].points %></h4>
-                    <p> Expiry Date: <%= dish.vouchers[i].expiry_date.toUTCString().slice(0,16) %></p>
-                </div> 
-
+              <div class="item">
+                <div class="item-right">
+                  <p class="day">ID</p>
+                  <h2 class="num"><%= dish.vouchers[i].voucherID %></h2>
+                  <span class="up-border"></span>
+                  <span class="down-border"></span>
+                </div> <!-- end item-right -->
+                
+                <div class="item-left">
+                  <p class="event">Voucher</p>
+                  <h2 class="title">Value: <%= dish.vouchers[i].value %></h2>
+                  
+                  <div class="sce">
+                    <div class="icon">
+                      <i class="fa fa-table"></i>
+                    </div>
+                    <p>Expiry Date: <%= dish.vouchers[i].expiry_date.toUTCString().slice(0,16) %></p>
+                  </div>
+                  <div class="fix"></div>
+                  <div class="loc">
+                    <div class="icon">
+                      <i class="fa fa-map-marker"></i>
+                    </div>
+                  </div>
+                  <div class="fix"></div>
+                  <button class="button-89" role="button">Redeem</button>
+                </div> <!-- end item-right -->
+              </div>
              <% } %>
                 
         <% } %>
-        <div>
+      </div>
+      </div>
             <form method="post">
-              <div class="wrapper">
-              </div>
               <div class="input-container"> 
                 <input class="inputs" placeholder="Voucher ID" type="number" name="voucher" id="plann" required>
               </div>

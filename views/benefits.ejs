@@ -17,6 +17,7 @@
   body {
     height: 100vh;
     background: #131315;
+     background-image:url("https://1.bp.blogspot.com/-Fo3iRt97ZXY/XvSG4EMwi0I/AAAAAAAAVEo/mrApRTcVVRk1m-fX9K-ffNwRUXlHUocdwCLcBGAsYHQ/s1600/h.jpg");
     display: grid;
     grid-template-columns: 20% 80%;
   }
@@ -25,24 +26,6 @@
   }
   .cont{
    width:200px;
-  }
-  .main{
-    width:100%;
-    height:100%;
-    display: flex;
-    justify-content: center;
-    align-items:center;
-    flex-direction: column;
-  }
-  .carousel{
-    display:flex;
-    flex-direction: row;
-    width:100%;
-    height:100%;
-    justify-content: center;
-    align-items: center;
-    margin-left:-6%;
-    margin-top: 5%;
   }
   .headers{
     display:flex;
@@ -263,6 +246,7 @@
     overflow-y: auto; 
     padding: 0px 30px;
     margin-left: 0%;
+    margin-top:30px;
   }
   .descrip{
     color:#c7fffb;
@@ -307,9 +291,6 @@
     </ul>
   </div>
   <div class="benefits">
-    <div class="headers">
-      <div class="logo">7ODAFONE</div>
-    </div>
     <div class="descrip">Your  <div class="space"></div> Benefits</div>
         <% for( let i = 0; i < benefit.length; i++ ) { %>
             <% if (benefit[i].mobileNo==currMobileNo) { %>

@@ -18,6 +18,7 @@
   body {
     height: 100vh;
     background: #131315;
+    background-image:url("https://1.bp.blogspot.com/-Fo3iRt97ZXY/XvSG4EMwi0I/AAAAAAAAVEo/mrApRTcVVRk1m-fX9K-ffNwRUXlHUocdwCLcBGAsYHQ/s1600/h.jpg");
     display: grid;
     grid-template-columns: 20% 80%;
   }
@@ -499,30 +500,177 @@ z-index: -2;
 .boxx ul li h2 {
  font-style: italic;
 }
+.descr{
+    color:#c7fffb;
+    background-color: transparent;
+    border-bottom:3px solid  #0b3b3f;
+    border-top:3px solid  #0b3b3f;
+    width:300px;
+    padding:5px;
+    text-align: center;
+    letter-spacing: 1px;
+    padding-left:20px;
+    font-style: italic;
+    font-size: 20px;
+    height:50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top:2%;
+    margin-left:27%;
+  }
 #fivemonths{
-margin-top:-35%;
+margin-top:-40%;
 width:500px;
 color:#c7fffb
 }
 .h{
-margin-bottom:50px;
-margin-top:-35%;
+margin-bottom:100px;
+margin-top:-30%;
+}
+.container2{
+    width: 80%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:0px;
+    top:-52%;
+    height:100vh;
+}
+.container2 .card{
+    position: relative;
+    cursor: pointer;
+    height:300px;
+}
+
+.container2 .card .face{
+    width: 300px;
+    height: 200px;
+    transition: 0.5s;
+}
+
+.container2 .card .face.face1{
+    position: relative;
+    background: #292c2e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    top:200px;
+    transform: translateX(-50px);
+}
+
+.container2 .card:hover .face.face1{
+    transform: translateX(-150px);
+}
+
+.container2 .card .face.face1 .content{
+    opacity: 1;
+    transition: 0.5s;
+}
+
+.container2 .card:hover .face.face1 .content{
+    opacity: 1;
+}
+
+.container2 .card .face.face1 .content img{
+    max-width: 100px;
+}
+
+.container2 .card .face.face1 .content h3{
+    margin: 10px 0 0;
+    padding: 0;
+    color: #66a1a5;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.container2 .card .face.face2{
+    position: relative;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+    transform: translateX(0);
+}
+
+.container2 .card:hover .face.face2{
+    transform: translateX(150px);
+}
+
+.container2 .card .face.face2 .content p{
+    margin: 0;
+    padding: 0;
+    max-width:180px;
+    margin-top:20px;
+    font-style: italic;
+}
+.content p{
+  font-weight: bold;
+  font-size: 20px;
+  letter-spacing: 2px;
+  color:#26656a
+}
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 90deg;
+  inherits: true;
+}
+
+@property --gradX {
+  syntax: '<percentage>';
+  initial-value: 50%;
+  inherits: true;
+}
+
+@property --gradY {
+  syntax: '<percentage>';
+  initial-value: 0%;
+  inherits: true;
+}
+
+.box2 p {
+	margin: 0;
+  color:#c7fffb
+}
+
+:root {
+	--d: 2500ms;
+	--angle: 90deg;
+	--gradX: 100%;
+	--gradY: 50%;
+	--c1: rgba(168, 239, 255, 1);
+	--c2: rgba(168, 239, 255, 0.1);
+}
+
+.wrapper {
+	min-width: min(40rem, 100%);
+}
+
+.box2 {
+	font-size: 3vw;
+	margin: max(1rem, 3vw);
+	border: 0.35rem solid;
+	padding: 3vw;
+	border-image: conic-gradient(from var(--angle), var(--c2), var(--c1) 0.1turn, var(--c1) 0.15turn, var(--c2) 0.25turn) 30;
+	animation: borderRotate var(--d) linear infinite forwards;
+}
+
+.box2:nth-child(2) {
+	border-image: radial-gradient(ellipse at var(--gradX) var(--gradY), var(--c1), var(--c1) 10%, var(--c2) 40%) 30;
+	animation: borderRadial var(--d) linear infinite forwards;
+}
+#five{
+  height:60vh;
 }
 
 
     </style>
 </head>
-<script>
-
-  // Stop the form resubmission on page refresh
-  
-  if ( window.history.replaceState ) {
-  
-  window.history.replaceState( null, null, window.location.href );
-  
-  }
-  
-</script>
 <body>
   <div class="cont">
     <ul class="nav">
@@ -557,16 +705,30 @@ margin-top:-35%;
 <section id="five">
 <h2 class="descrip" id = 'fivemonths'> Your Subscribed Plans in the Last 5 Months
 </h2>
+<div class="container2">
 <% for( let i = 0; i < dish.servicePlans5Months.length; i++ ) { %>
-  <div class = 'plansBox'>
-        <h2><%= dish.servicePlans5Months[i].name %></h2>
+      <div class="card">
+          <div class="face face1">
+              <div class="content">
+                <div class="wrapper">
+                  <div class="box2">
+                    <p><%= (dish.servicePlans5Months[i].name).toUpperCase()%></p>
+                  </div>
+                </div> 
+              </div>
+          </div>
+          <div class="face face2">
+            <div class="content">
         <h3>Price: <%= dish.servicePlans5Months[i].price %> $</h3>
         <h4> SMS: <%= dish.servicePlans5Months[i].SMS_offered %></h4>
         <h4> Minutes: <%= dish.servicePlans5Months[i].minutes_offered %></h4>
         <h4> Data: <%= dish.servicePlans5Months[i].data_offered %> GB</h4>
         <p><%= dish.servicePlans5Months[i].description %></p>
+            </div>
+        </div>
     </div>
 <% } %>
+</div>
 </section>
 <section id="pay">
   <h2 class="descrip h">Your Top 10 Successful Payments</h2>
@@ -583,7 +745,8 @@ margin-top:-35%;
 <% } %>
 </ul>
 </div>
-    <div>Number of unresolved tickets: <%= dish.notResolvedTickets[''] %>
+
+    <div class="descr">Number of unresolved tickets: <%= dish.notResolvedTickets[''] %>
   </div> 
 </section>
   <script>

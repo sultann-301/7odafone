@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +18,7 @@
   body {
     height: 100vh;
     background: #131315;
+    background-image:url("https://1.bp.blogspot.com/-Fo3iRt97ZXY/XvSG4EMwi0I/AAAAAAAAVEo/mrApRTcVVRk1m-fX9K-ffNwRUXlHUocdwCLcBGAsYHQ/s1600/h.jpg");
     display: grid;
     grid-template-columns: 20% 80%;
   }
@@ -45,13 +47,9 @@
     margin-top: 5%;
   }
   .headers{
-    display:flex;
-    justify-content:end;
-    color:#c7fffb;
-    padding:10px;
-    position:sticky;
-    width:100%;
-    margin-top:20px;
+    border-bottom: 3px solid #0b3b3f;
+    border-top:3px solid #0b3b3f;
+    width:80%;
   }
   .wel{
     margin-left:32%;
@@ -64,19 +62,6 @@
    margin-left:-2%;
   }
 
-  .arrow{
-    position:sticky;
-    color:#c7fffb;
-    font-size:40px;
-    margin-top:-40%;
-    cursor: pointer;
-  }
-  .left-arrow{
-    margin-right: 5%;
-  }
-  .right-arrow{
-    margin-left: 5%;
-  }
   li{
     color:#c7fffb;
   }
@@ -162,40 +147,16 @@
     }
 
 
-    .benefitsContainer{
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        align-items:stretch;
-        color: white;
-        margin-right: 30%;
-    }
-
-    .benefitBox
-    {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 20px;
-        font-size: 20px;
-        border:  3px solid #c7fffb ;
-        text-align: center;
-        border-radius: 25px;
-        padding: 40px;
-    }
-
-    .benefitBox h2{
-        padding-bottom: 10px;
-    }
 
     .input-container{
   display:flex;
   flex-direction: row;
-  width:300px;
+  width:80%;
   height:35px;
   border-radius:1rem ;
   background-color: transparent;
-  border:2px solid #50f8f3;
   margin-left:-8px;
+  gap:10px;
 }
 
 input {
@@ -206,12 +167,12 @@ input {
 .inputs{
   width:100%;
   height:95%;
-  border-radius:1rem;
   background-color: transparent;
   font-size: 15px;
   color:#effefd;
   border:none;
   padding-left:15px;
+  border-bottom: 1px solid #effefd;;
 }
 
 .inputs::placeholder{
@@ -241,20 +202,23 @@ button:hover{
 }
 form{
   display:flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width:90%;
-  gap:20px;
+  gap:40px;
   margin-left:-6%;
   margin-bottom: 7%;
+}
+.first{
+  flex-direction: column;
 }
   .space{
     width:25px;
 }
 label{
   color:#c7fffb;
-  width:100px;
+  width:100%;
   margin-left: 5px;
 }
 
@@ -295,20 +259,147 @@ label{
         text-decoration: none;
         cursor: pointer;
     }
+.flip-card {
+  background-color: transparent;
+  width: 80%;
+  height: 100%;
+  perspective: 1000px;
+}
 
-    </style>
+.flip-card-inner {
+  top:20%;
+  position: relative;
+  width: 70%;
+  height:115%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  left:20%;
+  
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius:2rem;
+}
+
+.flip-card-front {
+  background-color:transparent;
+  border: 3px solid #5de1d8;
+  color: black;
+
+}
+
+.flip-card-back {
+  border:3px solid #299b92;
+  background-color:transparent;
+  color: white;
+  transform: rotateY(180deg);
+}
+
+.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+.label{
+  display: flex;
+  flex-direction: row;
+}
+.buttons {
+  display: flex;
+  width: 900px;
+  gap: 10px;
+  --b: 5px;   /* the border thickness */
+  --h: 1.8em; /* the height */
+  margin-top:10%;
+  margin-left:10%;
+}
+
+.buttons button {
+  --_c: #5de1d8;
+  flex: calc(1.25 + var(--_s,0));
+  min-width: 0;
+  font-size: 25px;
+  height: var(--h);
+  cursor: pointer;
+  border: var(--b) solid var(--_c);
+  background: 
+    conic-gradient(at calc(100% - 1.3*var(--b)) 0,var(--_c) 209deg, #0000 211deg) 
+    border-box;
+  clip-path: polygon(0 0,100% 0,calc(100% - 0.577*var(--h)) 100%,0 100%);
+  padding: 0 calc(0.288*var(--h)) 0 0;
+  margin: 0 calc(-0.288*var(--h)) 0 0;
+  box-sizing: border-box;
+  transition: flex .4s;
+  color: #fff;
+  
+}
+.buttons button + button {
+  --_c: #299b92;
+  flex: calc(.75 + var(--_s,0));
+  background: 
+    conic-gradient(from -90deg at calc(1.3*var(--b)) 100%,var(--_c) 119deg, #0000 121deg) 
+    border-box;
+  clip-path: polygon(calc(0.577*var(--h)) 0,100% 0,100% 100%,0 100%);
+  margin: 0 0 0 calc(-0.288*var(--h));
+  padding: 0 0 0 calc(0.288*var(--h));
+  color: #fff;
+}
+.buttons button:focus-visible {
+  outline-offset: calc(-2*var(--b));
+  outline: calc(var(--b)/2) solid #000;
+  background: none;
+  clip-path: none;
+  margin: 0;
+  padding: 0;
+}
+.buttons button:focus-visible + button {
+  background: none;
+  clip-path: none;
+  margin: 0;
+  padding: 0;
+}
+.buttons button:has(+ button:focus-visible) {
+  background: none;
+  clip-path: none;
+  margin: 0;
+  padding: 0;
+}
+button:hover,
+button:active:not(:focus-visible) {
+  --_s: .75;
+}
+button:active {
+  box-shadow: inset 0 0 0 100vmax var(--_c);
+  color: #fff;
+}
+.active{
+  --_s: .75;
+  box-shadow: inset 0 0 0 100vmax var(--_c);
+  color: #364551;
+}
+.marg{
+  margin-left:10px;
+}
+label{
+  width:200px;
+}
+.row{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+.row .inputs{ 
+  width:200px;
+}
+</style>
 </head>
-<script>
-
-  // Stop the form resubmission on page refresh
-  
-  if ( window.history.replaceState ) {
-  
-  window.history.replaceState( null, null, window.location.href );
-  
-  }
-  
-</script>
 <body>
   <div class="cont">
     <ul class="nav">
@@ -322,44 +413,79 @@ label{
       <a href="/vouchers" class=" nav-elem">My Vouchers</a>
       <a href="/renew" class=" nav-elem active">Transactions</a>
     </ul>
-  </div>
-      <div class="benefitsContainer">
-        <form method ='post'>
+    </div>
+    <div class="flip-card" id="card">
+      <div class="buttons">
+        <button id="flipButtonBack" class="active">Recharge Balance</button>
+        <button id="flipButton">Renew Plan</button>
+      </div>
+      <div class="flip-card-inner">
+        <div class="flip-card-back">
+            <form method ='post' class="first">
+              <label class="headers" for="Amount">Renew Plan</label>
+                  <div class="input-container"> 
+                    <label for="name">Amount:</label>
+                    <input class="inputs" placeholder="Amount" type="number" name="amount" id="plann" required>
+                  </div>
+                  
+                  <div class="input-container"> 
+                    <label for="name">Plan ID:</label>
+                    <input class="inputs" placeholder="Plan" type="number" name="plan" id="plann" required>                
+                  </div>
+                  <div class="input-container"> 
+                  <label for="Payment Method">Payment Method:</label>
+                    <select class="inputs" name="method" class="inputs" required>
+                        <option value="Cash">Cash</option>
+                        <option value="Credit">Credit</option>
+                    </select>
+                  </div>
+                  <button  name='action'  value = 'renew' type="submit">Renew Plan</button>
+                  </form>
+        </div>
+    
+        <div class="flip-card-front">
+    
+          <form method = "post">
+            <label class="headers" for="Amount">Remaining/Extra Amounts</label>
+            <div class="input-container"> 
+            <label for="name">Plan Name:</label>
+            <input class="inputs" type="text" placeholder="Plan Name" id="number" name="planname" required>
+          </div>
+            <button type="submit"  name="action" value="showDetails">Show</button>
+            <div class="row">
+            <% if (success == 2 && rem != null && extra != null) { %>
+              <div class="inputs"> Remaining: <%= rem %></div>
+              <div class="inputs"> Extra: <%= extra %></div>
+            <% } %>
+          </div>
+          </form>
+    
+          <form class="help" method = 'post'>
+              <label class="headers" for="Amount">Recharge</label>
               <div class="input-container"> 
+                <label for="Amount">Amount:</label>
                 <input class="inputs" placeholder="Amount" type="number" name="amount" id="plann" required>
-              </div>
-              <div class="input-container"> 
-                <input class="inputs" placeholder="Plan" type="number" name="plan" id="plann" required>                
-              </div>
-              <label for="Payment Method">Choose a payment method:</label>
-                <select name="method" class="inputs" required>
+                <label class="marg" for="Payment Method">Payment Method:</label>
+                <select name="method" class="inputs">
                     <option value="Cash">Cash</option>
                     <option value="Credit">Credit</option>
                 </select>
-              <button  name='action'  value = 'renew' type="submit">Renew Plan</button>
-            
-          
+              </div>
+              <button type="submit" name="action" value="recharge">Recharge Balance</button>
+  
         </form>
+         
+    
+        </div>
+    
+      </div>
+    
+    </div> 
 
-        <form method = "post">
-          <label for="name">Plan Name:</label>
-          <input type="text" placeholder="Plan Name" id="number" name="planname" required>
-          <button type="submit"  name="action" value="showDetails">Please press the button to  ok trust me plz bro Show Remaining Amount & Extra Amount</button>
+  </div>
 
-        </form>
+     
 
-        <form method = 'post'>
-          <div class="input-container"> 
-              <input class="inputs" placeholder="Amount" type="number" name="amount" id="plann" required>
-            </div>
-            <label for="Payment Method">Choose a payment method:</label>
-              <select name="method" class="inputs">
-                  <option value="Cash">Cash</option>
-                  <option value="Credit">Credit</option>
-              </select>
-            <button type="submit" name="action" value="recharge">Recharge Balance</button>
-
-      </form>
       <% if (success > 2) { %>
         <div id="successModal" class="modal">
          <div class="modal-content">
@@ -373,11 +499,6 @@ label{
          </div>
      </div>
        <% } %>
-        <% if (success == 2 && rem != null && extra != null) { %>
-          <div> Remaining: <%= rem %></div>
-          <div> Extra: <%= extra %></div>
-         
-        <% } %>
         <% if (success < 2) { %>
             <div id="successModal" class="modal">
              <div class="modal-content">
@@ -395,6 +516,27 @@ label{
  
       
       <script>
+
+document.getElementById('flipButton').addEventListener('click', function() {
+
+document.getElementById('card').classList.add('flipped');
+document.getElementById('flipButton').classList.add('active');
+document.getElementById('flipButtonBack').classList.remove('active');
+
+
+});
+
+document.getElementById('flipButtonBack').addEventListener('click', function() {
+
+document.getElementById('card').classList.remove('flipped');
+document.getElementById('flipButtonBack').classList.add('active');
+document.getElementById('flipButton').classList.remove('active');
+
+});
+
+
+
+
         const success =  '<%= success || "" %>';
         var span = document.getElementsByClassName("close")[0];
          
@@ -411,7 +553,8 @@ label{
              }
          }
          
- 
+         
+
       </script>
         
     

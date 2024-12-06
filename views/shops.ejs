@@ -18,8 +18,10 @@
   body {
     height: 100vh;
     background: #131315;
+    background-image:url("https://1.bp.blogspot.com/-Fo3iRt97ZXY/XvSG4EMwi0I/AAAAAAAAVEo/mrApRTcVVRk1m-fX9K-ffNwRUXlHUocdwCLcBGAsYHQ/s1600/h.jpg");
     display: grid;
     grid-template-columns: 20% 80%;
+
   }
   a{
     text-decoration: none;
@@ -34,6 +36,7 @@
     justify-content: center;
     align-items:center;
     flex-direction: column;
+    margin-top:30px;
   }
   .carousel{
     display:flex;
@@ -53,6 +56,18 @@
     position:sticky;
     width:100%;
     margin-top:20px;
+  }
+  .header{
+    border-bottom: 3px solid #0b3b3f;
+    border-top:3px solid #0b3b3f;
+    width:80%;
+    margin-bottom:10px;
+    margin-top:10px;
+    justify-content: end;
+    color:#c7fffb;
+    font-style: italic;
+    letter-spacing: 2px;
+    font-size: 25px;
   }
   .wel{
     margin-left:32%;
@@ -156,31 +171,187 @@
   .nav:hover {
     width: 250px;
   }
-  .shopContainer{
-      display: flex;
-      flex-direction: column;
-      justify-content: space-evenly;
-      align-items:stretch;
-      color: white;
-      margin-right: 30%;
-      margin-top: 10%; 
+  .container{
+    width: 1000px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top:-100px;
+}
+
+.container .card{
+    position: relative;
+    cursor: pointer;
+    height:300px;
+    margin-bottom: 50px;
+}
+
+.container .card .face{
+    width: 300px;
+    height: 200px;
+    transition: 0.5s;
+}
+
+.container .card .face.face1{
+    position: relative;
+    background: #292c2e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    top:200px;
+    transform: translateX(-50px);
+}
+
+.container .card:hover .face.face1{
+    transform: translateX(-150px);
+}
+
+.container .card .face.face1 .content{
+    opacity: 1;
+    transition: 0.5s;
+}
+
+.container .card:hover .face.face1 .content{
+    opacity: 1;
+}
+
+.container .card .face.face1 .content img{
+    max-width: 100px;
+}
+
+.container .card .face.face1 .content h3{
+    margin: 10px 0 0;
+    padding: 0;
+    color: #66a1a5;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.container .card .face.face2{
+    position: relative;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+    transform: translateX(0);
+}
+
+.container .card:hover .face.face2{
+    transform: translateX(150px);
+}
+
+.container .card .face.face2 .content p{
+    margin: 0;
+    padding: 0;
+}
+.content p{
+  font-weight: bold;
+  font-size: 20px;
+  letter-spacing: 2px;
+  color:#26656a
+}
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 90deg;
+  inherits: true;
+}
+
+@property --gradX {
+  syntax: '<percentage>';
+  initial-value: 50%;
+  inherits: true;
+}
+
+@property --gradY {
+  syntax: '<percentage>';
+  initial-value: 0%;
+  inherits: true;
+}
+
+.box p {
+	margin: 0;
+  color:#c7fffb
+}
+
+:root {
+	--d: 2500ms;
+	--angle: 90deg;
+	--gradX: 100%;
+	--gradY: 50%;
+	--c1: rgba(168, 239, 255, 1);
+	--c2: rgba(168, 239, 255, 0.1);
+}
+
+.wrapper {
+	min-width: min(40rem, 100%);
+}
+
+.box {
+	font-size: 3vw;
+	margin: max(1rem, 3vw);
+	border: 0.35rem solid;
+	padding: 3vw;
+	border-image: conic-gradient(from var(--angle), var(--c2), var(--c1) 0.1turn, var(--c1) 0.15turn, var(--c2) 0.25turn) 30;
+	animation: borderRotate var(--d) linear infinite forwards;
+}
+
+.box:nth-child(2) {
+	border-image: radial-gradient(ellipse at var(--gradX) var(--gradY), var(--c1), var(--c1) 10%, var(--c2) 40%) 30;
+	animation: borderRadial var(--d) linear infinite forwards;
+}
+
+@keyframes borderRotate {
+	100% {
+		--angle: 420deg;
+	}
+}
+
+@keyframes borderRadial {
+	20% {
+		--gradX: 100%;
+		--gradY: 50%;
+	}
+	40% {
+		--gradX: 100%;
+		--gradY: 100%;
+	}
+	60% {
+		--gradX: 50%;
+		--gradY: 100%;
+	}
+	80% {
+		--gradX: 0%;
+		--gradY: 50%;
+	}
+	100% {
+		--gradX: 50%;
+		--gradY: 0%;
+	}
+}
+.descrip{
+    color:#c7fffb;
+    background-color: transparent;
+    border-bottom:3px solid  #0b3b3f;
+    border-top:3px solid  #0b3b3f;
+    width:300px;
+    padding:5px;
+    text-align: center;
+    letter-spacing: 1px;
+    padding-left:20px;
+    font-style: italic;
+    font-size: 20px;
+    height:50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left:2%;
   }
 
-  .shopBox
-  {
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 20px;
-      font-size: 20px;
-      border:  3px solid #c7fffb ;
-      text-align: center;
-      border-radius: 25px;
-      padding: 40px;
-  }
-
-  .shopBox h2{
-      padding-bottom: 10px;
-  }
     </style>
 </head>
 <body>
@@ -198,67 +369,34 @@
     </ul>
   </div>
       <div class="main">
-      <div class="headers">
-        <div class="logo">7ODAFONE</div>
-      </div>
-      <div class="shopContainer">
+        <div class="descrip">Our Shops</div>
+      <div class="container">
         <% for( let i = 0; i < shops.length; i++ ) { %>
-          <div class = 'shopBox'>
-            <h2>
-              Name : <%= shops[i].name %>
-            </h2>
-            <h3>
-              Category : <%= shops[i].Category %>
-            </h3>
+        <div class="card">
+            <div class="face face1">
+                <div class="content">
+                  <div class="wrapper">
+                    <div class="box">
+                      <p><%= (shops[i].name).toUpperCase()%></p>
+                    </div>
+                  </div>
+                 
+                </div>
+            </div>
+            <div class="face face2">
+              <div class="content">
+                  <p><%= shops[i].Category %></p>
+              </div>
           </div>
+      </div>
         <% } %>
       </div>
     </div>
       <script>
         </script>
-    <div class="container">
-        <div class="card">
-            <div class="face face1">
-                <div class="content">
-                    <img src="https://github.com/Jhonierpc/WebDevelopment/blob/master/CSS%20Card%20Hover%20Effects/img/design_128.png?raw=true">
-                    <h3>Design</h3>
-                </div>
-            </div>
-            <div class="face face2">
-                <div class="content">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cum cumque minus iste veritatis provident at.</p>
-                        <a href="#">Read More</a>
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="face face1">
-                <div class="content">
-                    <img src="https://github.com/Jhonierpc/WebDevelopment/blob/master/CSS%20Card%20Hover%20Effects/img/code_128.png?raw=true">
-                    <h3>Code</h3>
-                </div>
-            </div>
-            <div class="face face2">
-                <div class="content">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cum cumque minus iste veritatis provident at.</p>
-                        <a href="#">Read More</a>
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="face face1">
-                <div class="content">
-                    <img src="https://github.com/Jhonierpc/WebDevelopment/blob/master/CSS%20Card%20Hover%20Effects/img/launch_128.png?raw=true">
-                    <h3>Launch</h3>
-                </div>
-            </div>
-            <div class="face face2">
-                <div class="content">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cum cumque minus iste veritatis provident at.</p>
-                        <a href="#">Read More</a>
-                </div>
-            </div>
-        </div>
-    </div>
+
+             
+         
+        
 </body> 
 </html>
