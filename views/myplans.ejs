@@ -544,51 +544,48 @@ function createAndUpdateBoxes(values) {
   const container2 = document.getElementById('plan');
   // Clear any existing boxes in the container
   // Loop through the values and create boxes dynamically
-  container2.innerHTML=values.name;
+  container2.innerHTML=values.name + ' Usage ID:' + values.usageID;
   container.innerHTML="";
   container.innerHTML += `
       <div class="box">
-        <div class="shadow"></div>
         <div class="content">
           <div class="percent" data-text="SMS" style="--num: ${values.minutes_used}">
             <div class="dot"></div>
-            <svg>
+            <svg class="back">
               <circle cx="70" cy="70" r="70"></circle>
               <circle cx="70" cy="70" r="70"></circle>
             </svg>
           </div>
           <div class="number">
-            <h2>${values.minutes_used}<span>%</span></h2>
+            <h2>${values.minutes_used}<span>% (${values.mins}/${values.minsPlan})</span></h2>
           </div>
         </div>
       </div>
         <div class="box">
-        <div class="shadow"></div>
         <div class="content">
           <div class="percent" data-text="Data" style="--num: ${values.data_consumption}">
             <div class="dot"></div>
-            <svg>
+            <svg class="back">
               <circle cx="70" cy="70" r="70"></circle>
               <circle cx="70" cy="70" r="70"></circle>
             </svg>
           </div>
           <div class="number">
-            <h2>${values.data_consumption}<span>%</span></h2>
+            <h2>${values.data_consumption}<span>% (${values.data}/${values.dataPlan})</span></h2>
           </div>
         </div>
       </div>
         <div class="box">
-        <div class="shadow"></div>
         <div class="content">
           <div class="percent" data-text="Mins" style="--num: ${values.SMS_sent}">
             <div class="dot"></div>
-            <svg>
+             <svg class="back">
               <circle cx="70" cy="70" r="70"></circle>
               <circle cx="70" cy="70" r="70"></circle>
             </svg>
           </div>
           <div class="number">
-            <h2>${values.SMS_sent}<span>%</span></h2>
+            <h2>${values.SMS_sent}<span>% (${values.sms}/${values.smsPlan})</span></h2>
           </div>
         </div>
       </div>

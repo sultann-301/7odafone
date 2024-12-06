@@ -117,6 +117,13 @@ app.get("/myplans", async(req, res) => {
   res.render("myplans",{dish, name, usages : [
     {
       name: '',
+      data: 0,
+      mins: 0,
+      usageID: 'N/A',
+      sms: 0,
+      minsPlan: 0,
+      smsPlan: 0,
+      dataPlan: 0,
       data_consumption: 0,
       minutes_used: 0,
       SMS_sent: 0
@@ -135,6 +142,12 @@ app.post("/myplans", async(req, res) => {
     for (let j = 0; j < dish.allServicePlans.length; j++){
       let plan = dish.allServicePlans[j] 
       if (plan.name == usages[i].name){
+        usages[i].data = usages[i].data_consumption
+        usages[i].mins = usages[i].minutes_used
+        usages[i].sms = usages[i].SMS_sent
+        usages[i].dataPlan = plan.data_offered
+        usages[i].minsPlan = plan.minutes_offered
+        usages[i].smsPlan = plan.SMS_offered
         usages[i].data_consumption = Math.round((usages[i].data_consumption/plan.data_offered) * 100)
         usages[i].SMS_sent = Math.round((usages[i].SMS_sent/plan.SMS_offered) * 100)
         usages[i].minutes_used = Math.round((usages[i].minutes_used/plan.minutes_offered) * 100)
