@@ -358,7 +358,10 @@ app.post('/wallet', async (req, res) =>{
       res.render("wallet", {dish, cashAcc: 0, success: 0});
     }
 })
-
+app.get("/about", async(req, res) => {
+  const dish = await cookData(currMobileNo)
+  res.render("about",{dish, name: dish.name.recordset[0].name} );
+});
 
 
 app.get("/renew", async(req, res) => {

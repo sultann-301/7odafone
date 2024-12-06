@@ -262,7 +262,7 @@ label{
 .flip-card {
   background-color: transparent;
   width: 80%;
-  height: 100%;
+  height: 90%;
   perspective: 1000px;
 }
 
@@ -294,7 +294,6 @@ label{
   background-color:transparent;
   border: 3px solid #5de1d8;
   color: black;
-
 }
 
 .flip-card-back {
@@ -434,6 +433,9 @@ label{
   background: var(--color);
   color: #fff;
 }
+.flip-card-front .help{
+  margin-top: 10%;
+}
 </style>
 </head>
 <script>
@@ -492,7 +494,21 @@ label{
         </div>
     
         <div class="flip-card-front">
-    
+          <form class="help" method = 'post'>
+            <label class="headers" for="Amount">Recharge Balance </label>
+            <div class="input-container"> 
+              <label for="Amount">Amount:</label>
+              <input class="inputs" placeholder="Amount" type="number" name="amount" id="plann" required>
+              <label class="marg" for="Payment Method">Payment Method:</label>
+              <select name="method" class="inputs">
+                  <option value="Cash">Cash</option>
+                  <option value="Credit">Credit</option>
+              </select>
+            </div>
+            <button type="submit" name="action" value="recharge">Recharge Balance</button>
+
+      </form>
+       
           <form method = "post">
             <label class="headers" for="Amount">Remaining/Extra Amounts</label>
             <div class="input-container"> 
@@ -507,22 +523,7 @@ label{
             <% } %>
           </div>
           </form>
-    
-          <form class="help" method = 'post'>
-              <label class="headers" for="Amount">Recharge</label>
-              <div class="input-container"> 
-                <label for="Amount">Amount:</label>
-                <input class="inputs" placeholder="Amount" type="number" name="amount" id="plann" required>
-                <label class="marg" for="Payment Method">Payment Method:</label>
-                <select name="method" class="inputs">
-                    <option value="Cash">Cash</option>
-                    <option value="Credit">Credit</option>
-                </select>
-              </div>
-              <button type="submit" name="action" value="recharge">Recharge Balance</button>
   
-        </form>
-         
     
         </div>
     
