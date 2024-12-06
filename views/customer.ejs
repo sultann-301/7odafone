@@ -704,6 +704,34 @@ margin-top:-30%;
   background: var(--color);
   color: #fff;
 }
+@keyframes borderRotate {
+	100% {
+		--angle: 420deg;
+	}
+}
+
+@keyframes borderRadial {
+	20% {
+		--gradX: 100%;
+		--gradY: 50%;
+	}
+	40% {
+		--gradX: 100%;
+		--gradY: 100%;
+	}
+	60% {
+		--gradX: 50%;
+		--gradY: 100%;
+	}
+	80% {
+		--gradX: 0%;
+		--gradY: 50%;
+	}
+	100% {
+		--gradX: 50%;
+		--gradY: 0%;
+	}
+}
     </style>
 </head>
 <body>
@@ -718,6 +746,7 @@ margin-top:-30%;
       <a href="/myplans" class=" nav-elem">Plan Search</a>
       <a href="/vouchers" class=" nav-elem">My Vouchers</a>
       <a href="/renew" class=" nav-elem">Transactions</a>
+      <a href="/about" class=" nav-elem">About Us</a>
       <a class = "button-89" href = '/'>LOG OUT</a>
     </ul>
   </div>

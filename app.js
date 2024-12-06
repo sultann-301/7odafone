@@ -270,7 +270,11 @@ app.post("/accountAdmin", async(req, res) => {
   }
 
 });
-
+app.get("/about", async(req, res) => {
+  const dish = await cookData(currMobileNo);
+  const name = dish.name.recordset[0].name;
+  res.render("about",{name});
+});
 app.get("/shops", async(req, res) => {
   const dish = await cookData(currMobileNo);
   const shops = dish.getShops
@@ -798,6 +802,6 @@ async function updatePoints(number) {
     .execute("Total_Points_Account");
   return result.rowsAffected[2]
 }
-
+app.use(express.static(path.join(__dirname, 'public')))
 app.listen(3030);
 // module.exports = app;
